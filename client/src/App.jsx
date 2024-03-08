@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import { Route, Routes } from "react-router";
-import  RootLayout  from "./shared/layouts/RootLayout";
+import  RootLayout  from "../src/shared/layouts/RootLayout";
 // import { NotFoundPage } from "./shared/pages";
 import AuthRoutes from "./features/auth/routes/AuthRoutes";
 // import HomeRoutes from "./features/home/routes/HomeRoutes";
@@ -12,7 +12,8 @@ import AuthRoutes from "./features/auth/routes/AuthRoutes";
 // import {LandingPage} from "./shared/pages/LandingPage"
 import  SignIn  from './features/auth/components/SignIn';
 // import AdminRoutes from "./features/adminDashboard/routes/AdminRoutes";
-// import { PrivateRoutes } from './features/auth/routes/PrivateRoutes';
+import { PrivateRoutes } from './features/auth/routes/PrivateRoutes';
+import HomeRoutes from './features/home/routes/HomeRoutes'
 // import { isAuthenticated } from './features/auth/helpers';
 
 
@@ -26,9 +27,9 @@ function App() {
           <Route index  element={<SignIn/>} />
           <Route  path="/auth/*" element={<AuthRoutes />} />
 
-          {/* <Route  element={<PrivateRoutes/>}>
+          <Route  element={<PrivateRoutes/>}>
               <Route  path="/home/*" element={<HomeRoutes />} />
-          </Route> */}
+          </Route>
           {/* <Route  path="/home/*" element={<HomeRoutes />} /> */}
           {/* <Route  path={auth ?"/home/*" : "/auth/*" } element={auth ? <HomeRoutes/> : <AuthRoutes/> } /> */}
 

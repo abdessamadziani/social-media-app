@@ -8,14 +8,14 @@ async function sendMail(mailOptions){
             port: 587,
             auth: {
                 user: process.env.MY_EMAIL,
-                pass: process.env.MY_PASSWORD
+                     pass: process.env.MY_PASSWORD
             }
         });
 
         // define email options
 
         let details = await transporter.sendMail(mailOptions);
-        console.log("Message sent: %s", details.messageId);
+                    console.log("Message sent: %s", details.messageId);
 
     } catch (error) {
         console.log(error);

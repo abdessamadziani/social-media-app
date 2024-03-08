@@ -50,7 +50,6 @@ exports.signup = async (req, res) => {
         if (email) {
             return res.status(400).send('User already exisits. Please sign in')
         } else {
-        
                 const salt = await bcrypt.genSalt(10)
                 const hashedpassword = await bcrypt.hash(req.body.password, salt)
                 const user = new User({...req.body, password:hashedpassword})

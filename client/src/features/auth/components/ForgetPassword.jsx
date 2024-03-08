@@ -8,8 +8,8 @@ import Swal from 'sweetalert2'; // Import the main SweetAlert2 module
 import 'sweetalert2/dist/sweetalert2.min.css'; // Import the CSS file
 import 'sweetalert2/dist/sweetalert2.min.js'; // Import the JavaScript file
 
-export const ForgetPassword = () => {
 
+export const ForgetPassword = () => {
 
 
 
@@ -24,15 +24,7 @@ export const ForgetPassword = () => {
 
 
     
-//        const [email]=useState({
-//         email: ''
-//  })
-    
-    //    const handleChange=(e)=>{
-    
-    //       setUser({email,[e.target.id]:e.target.value})
-    
-    //    }
+
 
 const [email,setEmail]=useState()
 
@@ -73,7 +65,7 @@ const [email,setEmail]=useState()
 
   return (
     <>
-             <div className="container flex  mx-auto mt-6">
+             <div className="container flex  mx-auto mt-6" >
       <div className=" flex w-1/2 justify-center h-96 ">
           <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
               <form onSubmit={ handleSubmit(submitForgetPassword)} className="space-y-6" >
@@ -85,7 +77,7 @@ const [email,setEmail]=useState()
 
                   </div>
             
-                  <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
+                  <button  className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
                  
               </form>
           </div>
@@ -93,9 +85,23 @@ const [email,setEmail]=useState()
       </div>
       <div className="w-1/2">
         <img src={imgForgetPassword} alt="image" />
+
       </div>
-   </div>
+   </div> 
+
+
+
+
+
+
+
+
+
+
+
 
     </>
   )
 }
+
+
