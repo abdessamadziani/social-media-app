@@ -1,11 +1,57 @@
 import React from 'react'
 import imgface from '../../../shared/imgs/imgface.jpg'
+import like from '../../../shared/imgs/like.png'
+import liked from '../../../shared/imgs/liked.png'
+import share from '../../../shared/imgs/share.png'
+import commentsIcon from '../../../shared/imgs/comments.png'
+import { useState } from 'react'
 
 const ContentPost = () => {
+  const [Like,setLike] = useState(like)
+  const [count,setCount] = useState(10)
+  const [comment,setComment] = useState('')
+  const [comments,setComments] = useState([])
+  const [show,setShow] = useState(false)
+
+
+  const handleShow = ()=>{
+    if(show === false)
+      setShow(true)
+    else
+    setShow(false)
+
+  }
+
+
+  const addcomment = ()=>{
+    const newComment = {
+      ' id': '0001',
+       'user': 'me',
+       'title': comment
+     }
+     setComments([...comments,newComment])
+     setComment('')
+     document.getElementById('comment').value=''
+  }
+ 
+
+  const handleLike = ()=>{
+    if(Like === like)
+      {
+        setLike(liked)
+        setCount(count + 1)
+      }
+      else
+      {
+        setLike(like)
+        setCount(count - 1)
+
+      }
+  }
   return (
     <div style={{width:'100%',marginTop:20,marginBottom:20}} className='text-white'>
       
-        <div  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
+        <div style={{height:'800px'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 overflow-y-auto scroll-smooth	 	 	">
         <div class="flex items-center">
                     <div class="flex-shrink-0">
                         <img class="w-8 h-8 rounded-full" src={imgface} alt="Neil image"/>
@@ -23,33 +69,68 @@ const ContentPost = () => {
         <p className='text-black font-bold text-xs font-sans py-4'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum totam maiores distinctio facere mollitia inventore excepturi fugiat, aspernatur provident aut.</p>
         <img src={imgface} alt="" />
         
-            <div className='flex justify-between mt-6'>
+            <div  className='flex justify-between mt-6'>
               <div  className='flex items-center   '>
 
                    <div className='text-gray-900  mx-4 cursor-pointer'>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" />
-                        </svg>
-                        <p> 10 Likes</p>
+                        <img className='w-6 h-6' src={Like} alt="like"  onClick={handleLike}/>
+                        <p>{count} Likes</p>
                    </div>   
                    <div className='text-gray-900 mx-4  cursor-pointer'>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                           <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-                        </svg>
-                        <p> 25 Comments</p>
+                   <img className='w-6 h-6' src={commentsIcon} alt="comment" onClick={handleShow} />
+                    <p> 25 Comments</p>
                   </div>
 
               </div>
               <div className='text-gray-900 cursor-pointer '>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-                </svg>
+              <img className='w-6 h-6' src={share} alt="like" />
                 <p>Share</p>
-
               </div>
             </div>
-        </div>
 
+
+
+      {show === true ? (
+            <div className='flex mt-6 '>
+                <div className="flex-shrink-0">
+                    <img className="w-8 h-8 rounded-full" src={imgface} alt="Neil image"/>
+                </div>
+                <input
+                    type="text"
+                    name="comment"
+                    id="comment"
+                    className="block flex-1 border-0  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    placeholder="Write a comment ..."
+                    onChange={(e)=>setComment(e.target.value)}
+                  />
+                <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={addcomment}>
+                 Add comment
+               </button>
+            </div>
+               ) : null }
+
+            {comments.map((item,index)=>{
+               return(
+                  <div  key={index} className="flex items-center mt-4   	">
+                  <div className="flex-shrink-0">
+                      <img className="w-8 h-8 rounded-full" src={imgface} alt="Neil image"/>
+                  </div>
+                  <div className="flex-1 min-w-0 ms-4">
+                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                          {item.user}
+                      </p>
+                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                          {item.title}
+                      </p>
+                  </div>
+                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
+                      ...
+                  </div>
+                  </div>
+                )})}
+
+
+        </div>
     </div>
   )
 }

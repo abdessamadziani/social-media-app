@@ -6,7 +6,7 @@ export const PrivateRoutes = () => {
 
      return (
 
-        auth ? <Outlet/> : <Navigate to="/signin" />
+        auth ? <Outlet/> : <Navigate to="auth/signin" />
 
           )
 

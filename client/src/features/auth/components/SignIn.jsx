@@ -8,7 +8,7 @@ import axios from "axios"
 import Swal from 'sweetalert2'; // Import the main SweetAlert2 module
 import 'sweetalert2/dist/sweetalert2.min.css'; // Import the CSS file
 import 'sweetalert2/dist/sweetalert2.min.js'; // Import the JavaScript file
-import { LampDemo } from './ui/lamp'
+import {AnimatedPinDemo}  from './Card-3D'
 
 
 function SignIn() {
@@ -108,9 +108,6 @@ const submitSignIn = () => {
                   <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
                       Not registered? <Link to='http://localhost:5173/auth/signup' className="text-blue-700 hover:underline dark:text-blue-500">Create account</Link>
                   </div>
-
-
-                  {/* {JSON.stringify(user)} */}
               </form>
           </div>
           
@@ -121,6 +118,7 @@ const submitSignIn = () => {
    </div>
 
     </>
+
   )
 }
 

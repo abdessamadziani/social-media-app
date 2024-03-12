@@ -1,6 +1,13 @@
 import { Fragment } from 'react';
+import {Link,useNavigate} from 'react-router-dom'
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import imgface from '../../../shared/imgs/imgface.jpg'
+
+
+import Swal from 'sweetalert2'; // Import the main SweetAlert2 module
+import 'sweetalert2/dist/sweetalert2.min.css'; // Import the CSS file
+import 'sweetalert2/dist/sweetalert2.min.js'; // Import the JavaScript file
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -14,6 +21,32 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
+
+  const navigate=useNavigate()
+
+
+
+
+  const signout=()=>{
+     fetch('http://localhost:5000/api/admins/signout')
+     .then(()=>{
+       localStorage.removeItem('jwt_token')
+       Swal.fire({
+         title: 'User Signout see you NextTime',
+         showclassName: {
+           popup: 'animate__animated animate__fadeInDown'
+         },
+         hideclassName: {
+           popup: 'animate__animated animate__fadeOutUp'
+         }
+       })
+       navigate('/auth/signin');
+ 
+     })
+     .catch()
+   }
+
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -84,7 +117,7 @@ export default function NavBar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={imgface}
                         alt=""
                       />
                     </Menu.Button>
@@ -101,12 +134,13 @@ export default function NavBar() {
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <Menu.Item>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          
+                          <Link to='http://localhost:5173/home/profile' 
+
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Your Profile
-                          </a>
+                          </Link>
                         )}
                       </Menu.Item>
                       <Menu.Item>
@@ -123,6 +157,7 @@ export default function NavBar() {
                         {({ active }) => (
                           <a
                             href="#"
+                            onClick={signout}
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >
                             Sign out

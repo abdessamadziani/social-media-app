@@ -1,8 +1,20 @@
 import React from 'react'
+import LeftSide from './LeftSide'
+import NavBar from './NavBar'
+import RightSideProfile from './RightSideProfile'
+import MainPostProfile from './MainPostProfile'
+import LeftSideProfile from './LeftSideProfile'
 
 const Profile = () => {
   return (
-    <div className='text-white'>Profile</div>
+        <>
+            <NavBar/>
+            <div className='mx-4 my-10 flex  '>
+                <LeftSideProfile/>
+                <MainPostProfile/>
+                <RightSideProfile />
+            </div>
+        </>
   )
 }
 
