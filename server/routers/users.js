@@ -5,8 +5,11 @@ const {
   activeTrue,
   checkuser,
   reset,
+  followingUser,
 } = require("../controllers/userController");
 const { userById } = require("../middleware/user");
+const { verifyToken } = require("../middleware/verifyToken");
+
 
 const router = express.Router();
 
@@ -18,5 +21,13 @@ router.param("token", userById);
 router.post("/checkuser", checkuser);
 router.post("/forgetpassword/:token", reset);
 router.param("token", userById);
+
+
+
+
+//Following
+router.put("/following/:id" , verifyToken ,followingUser)
+
+
 
 module.exports = router;

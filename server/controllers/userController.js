@@ -242,3 +242,28 @@ exports.signin =(req, res) => {
       res.status(500).json({ error: 'Failed to reset user password' });
     }
   };
+
+
+  
+//Following user
+exports.followingUser = async(req , res)=>{
+    if(req.params.id !== req.body.userId){
+        const user = await User.findById(req.params.id);
+        const otheruser = await User.findById(req.body.userId);
+  
+        if(!user.followers.includes(req.body.userId)){
+            await user.updateOne({$push:{followers:req.body.userId}});
+            await otheruser.updateOne({$push:{following:req.params.id}});
+            return res.status(200).json("User has followed");
+        }else{
+            await user.updateOne({$pull:{followers:req.body.userId}});
+            await otheruser.updateOne({$pull:{following:req.params.id}});
+            return res.status(200).json("User has Unfollowed");
+        }
+    }else{
+        return res.status(400).json("You can't follow yourself")
+    }
+  }
+
+
+ 

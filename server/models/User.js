@@ -90,40 +90,21 @@ const userSchema = new Schema({
             }, 
         },
     ],
-    details: {
-      
-        // bio: {
-        //   type: String,
-
-        // },
-        address: {
-          type: String,
-
-
-        },
-        relationship: {
-          type: String,
-          enum : ['Single','In a relationship','Married','Divorced']
-
-
-        },
-        instagram: {
-          type: String,
-        }
-      
+    address: {
+      type: String,
     },
-    savedPosts: [
-      {
-        post: {
-          type: ObjectId,
-          ref: 'Post'
-        },
-        savedAt: {
-          type: Date,
-          default: new Date()
-        },
-      },
-    ],
+    // savedPosts: [
+    //   {
+    //     post: {
+    //       type: ObjectId,
+    //       ref: 'Post'
+    //     },
+    //     savedAt: {
+    //       type: Date,
+    //       default: new Date()
+    //     },
+    //   },
+    // ],
      
       
       

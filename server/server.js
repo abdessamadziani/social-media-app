@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 
 const app = express();
 const usersRoutes = require("./routers/users");
+const postsRoutes = require("./routers/posts");
 
 app.use(express.json());
 app.use(cors());
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/users", usersRoutes);
+app.use("/api/posts", postsRoutes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
