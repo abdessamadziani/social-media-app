@@ -10,7 +10,9 @@ const usersRoutes = require("./routers/users");
 const postsRoutes = require("./routers/posts");
 
 app.use(express.json());
-app.use(cors());
+ app.use(cors());
+// app.options('*', cors());
+
 app.use(cookieParser());
 connectDB();
 app.get("/", (req, res) => {

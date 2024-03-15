@@ -4,6 +4,7 @@ import NavBar from './NavBar'
 import RightSideProfile from './RightSideProfile'
 import MainPostProfile from './MainPostProfile'
 import LeftSideProfile from './LeftSideProfile'
+import Settings from './profileSettings/Settings'
 
 const Profile = () => {
   return (

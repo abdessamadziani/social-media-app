@@ -27,8 +27,9 @@ router.param("token", userById);
 
 
 
-//Following
+//Following 
 router.put("/following/:id" , verifyToken ,followingUser)
+
 router.get("/post/user/details/:id",userDetailsFromPost)
 
 router.get("/all/user/:id", getUsersToFollow)

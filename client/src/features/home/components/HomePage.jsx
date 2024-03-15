@@ -2,7 +2,7 @@
 import React from 'react'
 import NavBar from './NavBar'
 import LeftSide from './LeftSide'
-import RightSide from './RightSide'
+import RightSide from './RightSide/RightSide'
 import MainPost from './MainPost'
 const HomePage = () => {
   return (

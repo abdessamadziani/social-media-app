@@ -1,19 +1,32 @@
 import React from 'react'
-import imgface from '../../../shared/imgs/imgface.jpg'
-import Ads from './Ads'
+import Ads from '../Ads'
+import Follow from './Follow'
+import { useState,useEffect } from 'react'
+import axios from 'axios'
 
 const RightSide = () => {
+
+    const [users,setUsers] = useState([]);
+
+    useEffect(() => {
+     const getAllUsers = async()=>{
+      try {
+        const res = await axios.get(`http://localhost:5000/api/users/all/user/65eae5ab7bd923690fe88857`)
+        setUsers(res.data);
+      } catch (error) {
+        
+      }
+     }
+     getAllUsers();
+    }, [])
+
+
+
   return (
     <div style={{width:'20%'}} className='text-white'>
 
 
-
-
        <Ads/>
-
-
-
-
 
 
            <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
@@ -21,7 +34,11 @@ const RightSide = () => {
                   <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Suggested for you</h5>
                  
             </div>
-            <div className="flow-root">
+            {users.map((item,index) =>(
+            <Follow key={index} userdetails={item}/>
+
+            ))}
+            {/* <div className="flow-root">
                   <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
                       <li className="py-3 sm:py-4">
                           <div className="flex items-center">
@@ -57,9 +74,8 @@ const RightSide = () => {
                                   </p>
                               </div>
                               <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white cursor-pointer">
-                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                              </svg>
+                              
+                              <img className='w-5 h-5' src={adduser} alt="add user icon" />
                               </div>
                           </div>
                       </li>
@@ -77,9 +93,9 @@ const RightSide = () => {
                                   </p>
                               </div>
                               <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white cursor-pointer">
-                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z" />
-                              </svg>
+                             
+                                <img className='w-5 h-5' src={adduserdone} alt="add user icon" />
+
                               </div>
                           </div>
                       </li>
@@ -124,7 +140,8 @@ const RightSide = () => {
                           </div>
                       </li>
                   </ul>
-            </div>
+            </div> */}
+            
           </div>
 
 

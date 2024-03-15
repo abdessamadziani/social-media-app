@@ -4,13 +4,22 @@ import like from '../../../shared/imgs/like.png'
 import liked from '../../../shared/imgs/liked.png'
 import dislike from '../../../shared/imgs/dislike.png'
 import unlike from '../../../shared/imgs/unlike.png'
-
 import share from '../../../shared/imgs/share.png'
 import commentsIcon from '../../../shared/imgs/comments.png'
 import { useState,useEffect } from 'react'
 import axios from 'axios'
 
 const ContentPost = ({post}) => {
+
+
+
+  
+
+
+
+
+
+
   const [user,setUser] = useState({});
   useEffect(() => {
    const getUserOfPost = async()=>{
@@ -26,10 +35,8 @@ const ContentPost = ({post}) => {
 
 
 
-  console.log("user",user);
 
-
-  const [Like,setLike] = useState(like)
+  const [Like,setLike] = useState(post.like.includes("65eae5ab7bd923690fe88857") ? liked : like)
   const [Dislike,setDislike] = useState(dislike)
   const [count,setCount] = useState(post.like.length)
   const [comment,setComment] = useState('')
@@ -57,14 +64,16 @@ const ContentPost = ({post}) => {
   }
  
 
-  const handleLike = ()=>{
+  const handleLike = async ()=>{
     if(Like === like)
       {
+        await fetch(`http://localhost:5000/api/posts/${post._id}/like` , {method:"PUT" , headers:{'Content-Type':"application/Json",Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZTVhYjdiZDkyMzY5MGZlODg4NTciLCJpYXQiOjE3MTA1MDM0OTF9.cKVPjooIqPV_kOm5D72V4_HGfTFP820wO1BuN72BC9Q"}})
         setLike(liked)
         setCount(count + 1)
       }
       else
       {
+        await fetch(`http://localhost:5000/api/posts/${post._id}/like` , {method:"PUT" , headers:{'Content-Type':"application/Json",Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZTVhYjdiZDkyMzY5MGZlODg4NTciLCJpYXQiOjE3MTA1MDM0OTF9.cKVPjooIqPV_kOm5D72V4_HGfTFP820wO1BuN72BC9Q"}})
         setLike(like)
         setCount(count - 1)
 
@@ -79,7 +88,6 @@ const ContentPost = ({post}) => {
       else
       {
         setDislike(dislike)
-
       }
   }
   return (
