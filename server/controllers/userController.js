@@ -266,4 +266,52 @@ exports.followingUser = async(req , res)=>{
   }
 
 
+  //get user details for post
+exports.userDetailsFromPost = async(req , res)=>{
+    try {
+        const user = await User.findById(req.params.id);
+        if(!user){
+            return res.status(400).json("User not found")
+        }
+        const {email , password , bdate,role,friends,followers,following,address,search,bio , ...others}=user._doc;
+        res.status(200).json(others);
+    } catch (error) {
+        return res.status(500).json("Internal server error")
+    }
+}
+
+//get user to follow
+exports.getUsersToFollow= async(req , res)=>{
+    try {
+        // const allUser = await User.find();
+        const allUserExceptCurrentUser = await User.find({_id: {$ne: req.params.id}});
+
+        const user = await User.findById(req.params.id);
+        const followinguser = await Promise.all(
+            user.following.map((item)=>{
+                return item;
+            })
+        )
+        let UserToFollow = allUserExceptCurrentUser.filter((val)=>{
+            return !followinguser.find((item)=>{
+                return (val._id.toString()===item) ;
+            })
+        })
+
+        let filteruser = await Promise.all(
+            UserToFollow.map((item)=>{
+                if(item !== req.params.id.toString())
+                {
+                    const {email , address,bio,bdate , Followers , Following , password , ...others} = item._doc;
+                    return others
+                }
+               
+            })
+        )
+
+        res.status(200).json(filteruser)
+    } catch (error) {
+        
+    }
+}
  

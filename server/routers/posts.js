@@ -176,7 +176,7 @@ router.get("/followers/:id" , async(req , res)=>{
 
 
 //Fetch posts from users that i follow
-router.get("/flw/:id" , verifyToken , async(req , res)=>{
+router.get("/flw/:id" , async(req , res)=>{
       try {
           const user = await User.findById(req.params.id);
           const UsersThatIFollowPosts = await Promise.all(

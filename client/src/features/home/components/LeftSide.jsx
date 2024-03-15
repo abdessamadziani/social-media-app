@@ -1,7 +1,37 @@
 import React from 'react'
 import imgface from '../../../shared/imgs/imgface.jpg'
 import {AnimatedPinDemo} from '../../auth/components/Card-3D'
+import { useState,useEffect } from 'react'
+import axios from 'axios'
 const LeftSide = () => {
+
+
+    const [post, setPost] = useState([]);
+
+    useEffect(() => {
+        const getPost = async () => {
+            try {
+                const res = await axios.get(`http://localhost:5000/api/posts/flw/65eae5ab7bd923690fe88857`
+                // , {
+                //     headers: {
+                //         token: accessToken // Assuming accessToken is defined somewhere
+                //     }
+                // }
+                );
+                setPost(res.data);
+            } catch (error) {
+                // Handle error
+                console.error("Error fetching posts:", error);
+            }
+        };
+        
+        getPost();
+    }, []); // Empty dependency array means this effect runs only once after the component mounts
+
+    console.log("kk", post); // Log the post state to the console
+
+
+   
   return (
     <div style={{width:'20%'}} className='text-white'>
          
@@ -118,7 +148,10 @@ const LeftSide = () => {
             </div>
           
             <div style={{ display: 'grid',gridTemplateColumns: '1fr 1fr 1fr'}} className="  gap-4 ">
-                    <div className="">
+                 {post.map(image => (
+                    <img className="w-18 h-18 rounded-lg " src={image.image} alt="Neil image"/>
+                ))}
+                    {/* <div className="">
                         <img className="w-18 h-18 rounded-lg " src={imgface} alt="Neil image"/>
                     </div>
                       <div className="">
@@ -147,7 +180,7 @@ const LeftSide = () => {
                     </div>
                     <div className="">
                         <img className="w-18 h-18  rounded-lg " src={imgface} alt="Neil image"/>
-                    </div> 
+                    </div>  */}
 
             </div>
 

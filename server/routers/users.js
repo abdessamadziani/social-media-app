@@ -6,6 +6,8 @@ const {
   checkuser,
   reset,
   followingUser,
+  userDetailsFromPost,
+   getUsersToFollow,
 } = require("../controllers/userController");
 const { userById } = require("../middleware/user");
 const { verifyToken } = require("../middleware/verifyToken");
@@ -27,7 +29,8 @@ router.param("token", userById);
 
 //Following
 router.put("/following/:id" , verifyToken ,followingUser)
+router.get("/post/user/details/:id",userDetailsFromPost)
 
-
+router.get("/all/user/:id", getUsersToFollow)
 
 module.exports = router;

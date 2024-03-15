@@ -1,8 +1,32 @@
 import React from 'react'
 import imgface from '../../../shared/imgs/imgface.jpg'
 import ContentPost from './ContentPost'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
+
 
 const MainPost = () => {
+
+  const accesstoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZTVhYjdiZDkyMzY5MGZlODg4NTciLCJpYXQiOjE3MTA0MjM4ODN9.PXINrVMQX0zsVYcCmvlOdxSxHZW-xzQfUJfrTdEr-dU';
+  const [post , setPost] = useState([]);
+  useEffect(() => {
+   const getPost = async()=>{
+    try {
+      const res = await axios.get(`http://localhost:5000/api/posts/flw/65eae5ab7bd923690fe88857` , {
+        headers:{
+          token:accesstoken
+        }
+      })
+      setPost(res.data);
+    } catch (error) {
+      
+    }
+   }
+   getPost();
+  }, [])
+
+
+
   return (
     <>
     <div style={{width:'45%',margin:'auto'}} className='text-white'>
@@ -41,16 +65,17 @@ const MainPost = () => {
                     </div>
 
               </div>
-              <button class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+              <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
                  Post
               </button>
            
             </div>
         </div>
         
-        <ContentPost/>
-        <ContentPost/>
-        <ContentPost/>
+        {post.map((item,index)=>(
+          <ContentPost key={index} post={item}/>
+      ))}
+    
 
     </div>
    </>

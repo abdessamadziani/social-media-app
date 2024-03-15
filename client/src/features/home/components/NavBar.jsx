@@ -92,14 +92,14 @@ export default function NavBar() {
              
               </div>
             
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 ">
               <input
                     type="text"
-                    name="username"
-                    id="username"
+                    name="search"
+                    id="search"
                     autoComplete="username"
                     className="block flex-1 border-2 text-white bg-transparent py-1.5 pl-1  placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                    placeholder="Shearch"
+                    placeholder="search"
                   />
                 <button
                   type="button"
