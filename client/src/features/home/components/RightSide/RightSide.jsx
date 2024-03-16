@@ -7,16 +7,16 @@ import axios from 'axios'
 const RightSide = () => {
 
     const [users,setUsers] = useState([]);
-
+    const getAllUsers = async()=>{
+        try {
+          const res = await axios.get(`http://localhost:5000/api/users/all/user/65eae5ab7bd923690fe88857`)
+          setUsers(res.data);
+        } catch (error) {
+          
+        }
+       }
     useEffect(() => {
-     const getAllUsers = async()=>{
-      try {
-        const res = await axios.get(`http://localhost:5000/api/users/all/user/65eae5ab7bd923690fe88857`)
-        setUsers(res.data);
-      } catch (error) {
-        
-      }
-     }
+    
      getAllUsers();
     }, [])
 
@@ -35,7 +35,7 @@ const RightSide = () => {
                  
             </div>
             {users.map((item,index) =>(
-            <Follow key={index} userdetails={item}/>
+            <Follow key={index} fetchusers={getAllUsers}  userdetails={item}/>
 
             ))}
             {/* <div className="flow-root">

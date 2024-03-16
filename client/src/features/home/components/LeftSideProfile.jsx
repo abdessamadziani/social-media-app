@@ -1,7 +1,25 @@
 import React from 'react'
 import imgface from '../../../shared/imgs/imgface.jpg'
+import axios from 'axios';
+import { useState,useEffect } from 'react';
 
 function LeftSideProfile() {
+
+    const [followingUsers,setFollowingUsers] = useState([]);
+    const getAllFollowingUsers = async()=>{
+        try {
+          const res = await axios.get(`http://localhost:5000/api/posts/following/65eae5ab7bd923690fe88857`)
+          setFollowingUsers(res.data);
+        } catch (error) {
+          
+        }
+       }
+    useEffect(() => {
+    
+     getAllFollowingUsers();
+    }, [])
+
+    console.log(followingUsers)
   return (
     <div style={{width:'20%'}} className='text-white'>
          
@@ -49,7 +67,7 @@ function LeftSideProfile() {
 
 
 
-<div className="w-full max-w-md p-4 bg-white border border-gray-200 mt-10 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+{/* <div className="w-full max-w-md p-4 bg-white border border-gray-200 mt-10 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
               <div className="flex items-center justify-between mb-4">
                   <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Friends</h5>
                   <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
@@ -109,7 +127,32 @@ function LeftSideProfile() {
             </div>
 
           </div>
+</div> */}
+
+
+<div className="w-full max-w-md p-4 bg-white border border-gray-200 mt-10 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+              <div className="flex items-center justify-between mb-4">
+                  <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Following</h5>
+                  <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                      See all
+                  </a>
+            </div>
+          
+            <div style={{ display: 'grid',gridTemplateColumns: '1fr 1fr 1fr'}} className="  gap-4 ">
+                {followingUsers.map((user,index) => (
+                        <div key={index} className="">
+                        <img className="w-18 h-18 rounded-lg " src={user.avatar} alt="Neil image"/>
+                        <p className='text-black font-bold text-xs truncate  mt-2 text-center'>{user.username}</p>
+                        </div>
+                ))}
+                   
+            </div>
+
+          </div>
 </div>
+
+
+
   )
 }
 

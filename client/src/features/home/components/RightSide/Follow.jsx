@@ -5,26 +5,43 @@ import adduser from '../../../../shared/imgs/add-user.png'
 import adduserdone from '../../../../shared/imgs/add-user-done.png'
 import axios from 'axios'
 
-const Follow = ({userdetails}) => {
+const Follow = ({userdetails,fetchusers}) => {
 
     const [follow, setFollow] = useState(adduser);
 
-    const handleFollow = async () => {
+    const handleFollow = async (id) => {
       try {
           // Make the Axios PUT request
           await axios.put(
-          `http://localhost:5000/api/users/following/${userdetails._id}`,
+          `http://localhost:5000/api/users/following/${id}`,
           { userId: '65eae5ab7bd923690fe88857' }, // Body data
           {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZTVhYjdiZDkyMzY5MGZlODg4NTciLCJpYXQiOjE3MTA1MDM0OTF9.cKVPjooIqPV_kOm5D72V4_HGfTFP820wO1BuN72BC9Q'
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZTVhYjdiZDkyMzY5MGZlODg4NTciLCJpYXQiOjE3MTA1MzQ3ODB9.KZ2U_lOVO-bMFEdHMqauzHmzfH7PA_vZKrAxjA8Zey8'
             }
           }
+
         );
-        
+       
+        setTimeout(() => {
+            fetchusers()
+            setFollow(adduser);
+
+          }, 3000);
+
         // Update the follow state after the request is successful
-        setFollow(adduserdone);
+
+        if(follow === adduser )
+            {
+                setFollow(adduserdone);
+            }
+        else
+        {
+            setFollow(adduser);
+        }
+
+        
       } catch (error) {
         // Handle errors
         console.error('Error:', error);

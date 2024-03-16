@@ -1,7 +1,27 @@
 import React from 'react'
 import imgface from '../../../shared/imgs/imgface.jpg'
 import FriendRequest from './FriendRequest'
+import Follow from './RightSide/Follow'
+import axios from 'axios'
+import { useState,useEffect } from 'react'
+
 function RightSideProfile() {
+
+
+    const [users,setUsers] = useState([]);
+    const getAllUsers = async()=>{
+        try {
+          const res = await axios.get(`http://localhost:5000/api/users/all/user/65eae5ab7bd923690fe88857`)
+          setUsers(res.data);
+        } catch (error) {
+          
+        }
+       }
+    useEffect(() => {
+    
+     getAllUsers();
+    }, [])
+
   return (
     <div>
           <div style={{width:'25vw'}} className='text-white'>
@@ -21,7 +41,12 @@ function RightSideProfile() {
             <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Suggested for you</h5>
             
         </div>
-        <div className="flow-root">
+
+        {users.map((item,index) =>(
+            <Follow key={index} fetchusers={getAllUsers}  userdetails={item}/>
+
+            ))}
+        {/* <div className="flow-root">
             <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
                 <li className="py-3 sm:py-4">
                     <div className="flex items-center">
@@ -124,7 +149,7 @@ function RightSideProfile() {
                     </div>
                 </li>
             </ul>
-        </div>
+        </div> */}
     </div>
 
 

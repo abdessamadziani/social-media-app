@@ -280,7 +280,7 @@ exports.userDetailsFromPost = async(req , res)=>{
     }
 }
 
-//get user to follow
+//get users to follow
 exports.getUsersToFollow= async(req , res)=>{
     try {
         // const allUser = await User.find();

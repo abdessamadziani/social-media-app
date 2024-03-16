@@ -1,8 +1,29 @@
 import React from 'react'
 import imgface from '../../../shared/imgs/imgface.jpg'
 import ContentPost from './ContentPost'
+import { useState,useEffect } from 'react'
+import axios from 'axios'
 
 function MainPostProfile() {
+  const accesstoken ='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZTVhYjdiZDkyMzY5MGZlODg4NTciLCJpYXQiOjE3MTA1MzQ3ODB9.KZ2U_lOVO-bMFEdHMqauzHmzfH7PA_vZKrAxjA8Zey8';
+  const [post , setPost] = useState([]);
+  useEffect(() => {
+   const getPost = async()=>{
+    try {
+      const res = await axios.get(`http://localhost:5000/api/posts/get/post/65eae5ab7bd923690fe88857` , {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': accesstoken
+        }
+      })
+      setPost(res.data);
+    } catch (error) {
+      
+    }
+   }
+   getPost();
+  }, [])
+
   return (
     <div style={{width:'45%',margin:'auto'}} className='text-white'>
       
@@ -47,8 +68,9 @@ function MainPostProfile() {
             </div>
         </div>
         
-        <ContentPost/>
-
+        {post.map((item,index)=>(
+          <ContentPost key={index} post={item}/>
+      ))}
     </div>
   )
 }
