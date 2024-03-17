@@ -244,6 +244,11 @@ exports.signin =(req, res) => {
   };
 
 
+  exports.signout = (req, res) => {
+    res.clearCookie('token')
+    res.json({message: 'Signout'})
+  }
+
   
 //Following user
 exports.followingUser = async(req , res)=>{

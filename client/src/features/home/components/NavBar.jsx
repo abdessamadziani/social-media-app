@@ -3,6 +3,8 @@ import {Link,useNavigate} from 'react-router-dom'
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import imgface from '../../../shared/imgs/imgface.jpg'
+import {useDispatch } from 'react-redux';
+import { logout } from '../../../redux/userSlice';
 
 
 import Swal from 'sweetalert2'; // Import the main SweetAlert2 module
@@ -21,6 +23,7 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
+  const dispatch = useDispatch()
 
   const navigate=useNavigate()
 
@@ -28,9 +31,10 @@ export default function NavBar() {
 
 
   const signout=()=>{
-     fetch('http://localhost:5000/api/admins/signout')
+     fetch('http://localhost:5000/api/users/signout')
      .then(()=>{
        localStorage.removeItem('jwt_token')
+       dispatch(logout())
        Swal.fire({
          title: 'User Signout see you NextTime',
          showclassName: {

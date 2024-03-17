@@ -10,8 +10,15 @@ import 'sweetalert2/dist/sweetalert2.min.css'; // Import the CSS file
 import 'sweetalert2/dist/sweetalert2.min.js'; // Import the JavaScript file
 import {AnimatedPinDemo}  from './Card-3D'
 
+import { login } from '../../../redux/api'
+import { useDispatch,useSelector } from 'react-redux'
+
 
 function SignIn() {
+  const dispatch = useDispatch()
+  const {isFetching ,error} = useSelector((state)=>state.theUser)
+
+  
   const navigate=useNavigate()
 
   const {
@@ -37,15 +44,24 @@ const [user,setUser]=useState({
 
 
 const submitSignIn = () => {
-  axios.post('http://localhost:5000/api/users/signin', user, {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-  })
+  // axios.post('http://localhost:5000/api/users/signin', user, {
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Content-Type': 'application/json',
+  //   },
+  // })
+        login(dispatch,user)
+        // const token =useSelector((state)=>state.theUser.user[0].token)
+        // alert(token)
+
     .then(res => {
+      // alert(res.data.token)
       // Handle the successful response here.
-      console.log(res.data);
+      // console.log(res.data);
+
+
+    //  login(dispatch,{user})
+
       clearInputs();
       Swal.fire({
         title: 'Sign is done successfully',
@@ -54,9 +70,9 @@ const submitSignIn = () => {
         confirmButtonText: 'Cool'
       });
 
-              console.log(' this is the res before create local storage',res);
-              localStorage.setItem('jwt_token',JSON.stringify(res.data));
-              console.log(' this is the res.data after creat local storage',res.data);
+              // console.log(' this is the res before create local storage',res);
+              // localStorage.setItem('jwt_token',JSON.stringify(res.data));
+              // console.log(' this is the res.data after creat local storage',res.data);
       navigate('/home')
     })
     .catch(error => {

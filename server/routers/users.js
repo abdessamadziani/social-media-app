@@ -8,6 +8,7 @@ const {
   followingUser,
   userDetailsFromPost,
    getUsersToFollow,
+   signout
 } = require("../controllers/userController");
 const { userById } = require("../middleware/user");
 const { verifyToken } = require("../middleware/verifyToken");
@@ -23,6 +24,8 @@ router.param("token", userById);
 router.post("/checkuser", checkuser);
 router.post("/forgetpassword/:token", reset);
 router.param("token", userById);
+router.get('/signout',signout)
+
 
 
 

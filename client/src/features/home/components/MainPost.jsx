@@ -3,18 +3,22 @@ import imgface from '../../../shared/imgs/imgface.jpg'
 import ContentPost from './ContentPost'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import {useSelector } from 'react-redux'
 
 
 const MainPost = () => {
-
-  const accesstoken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZTVhYjdiZDkyMzY5MGZlODg4NTciLCJpYXQiOjE3MTA0MjM4ODN9.PXINrVMQX0zsVYcCmvlOdxSxHZW-xzQfUJfrTdEr-dU';
+  const {user}=useSelector((state)=>state.theUser)
+  const accesstoken=user.token
   const [post , setPost] = useState([]);
   useEffect(() => {
    const getPost = async()=>{
+
     try {
-      const res = await axios.get(`http://localhost:5000/api/posts/flw/65eae5ab7bd923690fe88857` , {
-        headers:{
-          token:accesstoken
+      const res = await axios.get(`http://localhost:5000/api/posts/flw/${user.user._id}` , {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accesstoken}`
+
         }
       })
       setPost(res.data);

@@ -3,13 +3,16 @@ import Ads from '../Ads'
 import Follow from './Follow'
 import { useState,useEffect } from 'react'
 import axios from 'axios'
+import {useSelector } from 'react-redux'
 
 const RightSide = () => {
+    const {user}=useSelector((state)=>state.theUser)
+    const currentUserId=user.user._id
 
     const [users,setUsers] = useState([]);
     const getAllUsers = async()=>{
         try {
-          const res = await axios.get(`http://localhost:5000/api/users/all/user/65eae5ab7bd923690fe88857`)
+          const res = await axios.get(`http://localhost:5000/api/users/all/user/${currentUserId}`)
           setUsers(res.data);
         } catch (error) {
           

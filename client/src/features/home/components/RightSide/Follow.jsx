@@ -4,21 +4,25 @@ import imgface from '../../../../shared/imgs/imgface.jpg'
 import adduser from '../../../../shared/imgs/add-user.png'
 import adduserdone from '../../../../shared/imgs/add-user-done.png'
 import axios from 'axios'
+import {useSelector } from 'react-redux'
 
 const Follow = ({userdetails,fetchusers}) => {
+    const {user}=useSelector((state)=>state.theUser)
 
     const [follow, setFollow] = useState(adduser);
 
     const handleFollow = async (id) => {
       try {
           // Make the Axios PUT request
+          const accesstoken=user.token
           await axios.put(
           `http://localhost:5000/api/users/following/${id}`,
           { userId: '65eae5ab7bd923690fe88857' }, // Body data
           {
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZTVhYjdiZDkyMzY5MGZlODg4NTciLCJpYXQiOjE3MTA1MzQ3ODB9.KZ2U_lOVO-bMFEdHMqauzHmzfH7PA_vZKrAxjA8Zey8'
+              'Authorization': `Bearer ${accesstoken}`
+
             }
           }
 
