@@ -278,7 +278,7 @@ exports.userDetailsFromPost = async(req , res)=>{
         if(!user){
             return res.status(400).json("User not found")
         }
-        const {email , password , bdate,role,friends,followers,following,address,search,bio , ...others}=user._doc;
+        const {email , password , bdate,role,friends,address,search , ...others}=user._doc;
         res.status(200).json(others);
     } catch (error) {
         return res.status(500).json("Internal server error")

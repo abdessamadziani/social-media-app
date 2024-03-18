@@ -5,8 +5,11 @@ import Follow from './RightSide/Follow'
 import axios from 'axios'
 import { useState,useEffect } from 'react'
 import {useSelector } from 'react-redux'
-
 function RightSideProfile() {
+
+
+
+
     const {user}=useSelector((state)=>state.theUser)
 
     const [followers,setFollowers] = useState([]);

@@ -38,14 +38,15 @@ export default function NavBar() {
        localStorage.removeItem('jwt_token')
        dispatch(logout())
        Swal.fire({
-         title: 'User Signout see you NextTime',
-         showclassName: {
-           popup: 'animate__animated animate__fadeInDown'
-         },
-         hideclassName: {
-           popup: 'animate__animated animate__fadeOutUp'
-         }
-       })
+        title: 'User Signout see you NextTime',
+        showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+        }
+    });
+    
        navigate('/auth/signin');
  
      })
@@ -141,7 +142,7 @@ export default function NavBar() {
                       <Menu.Item>
                         {({ active }) => (
                           
-                          <Link to={`http://localhost:5173/home/profile/${user.user._id}`}
+                          <Link to={`http://localhost:5173/home/profile/${user?.user?._id}`}
 
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >

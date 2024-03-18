@@ -7,7 +7,7 @@ import {useSelector } from 'react-redux'
 
 const RightSide = () => {
     const {user}=useSelector((state)=>state.theUser)
-    const currentUserId=user.user._id
+    const currentUserId=user?.user?._id
 
     const [users,setUsers] = useState([]);
     const getAllUsers = async()=>{

@@ -12,14 +12,6 @@ import axios from 'axios'
 const ContentPost = ({post}) => {
 
 
-
-  
-
-
-
-
-
-
   const [user,setUser] = useState({});
   useEffect(() => {
    const getUserOfPost = async()=>{
@@ -95,7 +87,7 @@ const ContentPost = ({post}) => {
       
         <div style={{height:'800px'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 overflow-y-auto scroll-smooth	 	 	">
         <div className="flex items-center">
-                    <div class="flex-shrink-0">
+                    <div className="flex-shrink-0">
                         <img className="w-8 h-8 rounded-full" src={imgface} alt="Neil image"/>
                     </div>
                     <div className="flex-1 min-w-0 ms-4">

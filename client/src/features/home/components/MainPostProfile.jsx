@@ -1,18 +1,25 @@
 import React from 'react'
 import imgface from '../../../shared/imgs/imgface.jpg'
 import ContentPost from './ContentPost'
+import {useLocation,Link} from 'react-router-dom'
+
 import { useState,useEffect } from 'react'
 import axios from 'axios'
 import {useSelector } from 'react-redux'
 
 function MainPostProfile() {
+
+  
+  let location = useLocation();
+  let id = location.pathname.split("/")[3];
+
   const {user}=useSelector((state)=>state.theUser)
   const accesstoken=user.token
     const [post , setPost] = useState([]);
   useEffect(() => {
    const getPost = async()=>{
     try {
-      const res = await axios.get(`http://localhost:5000/api/posts/get/post/${user.user._id}` , {
+      const res = await axios.get(`http://localhost:5000/api/posts/get/post/${id}` , {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${accesstoken}`
