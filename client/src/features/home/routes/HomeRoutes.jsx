@@ -11,7 +11,7 @@ const HomeRoutes = () => (
   <Routes>
       <Route path="/" element={<HomeLayout />} >
             <Route index element={<HomePage />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile/:id" element={<Profile />} />
             <Route path="setting" element={<Settings />} />
 
      </Route>

@@ -3,7 +3,7 @@ import {Link,useNavigate} from 'react-router-dom'
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import imgface from '../../../shared/imgs/imgface.jpg'
-import {useDispatch } from 'react-redux';
+import {useDispatch,useSelector } from 'react-redux';
 import { logout } from '../../../redux/userSlice';
 
 
@@ -23,7 +23,9 @@ function classNames(...classes) {
 }
 
 export default function NavBar() {
+  const {user} = useSelector((state)=>state.theUser)
   const dispatch = useDispatch()
+
 
   const navigate=useNavigate()
 
@@ -139,7 +141,7 @@ export default function NavBar() {
                       <Menu.Item>
                         {({ active }) => (
                           
-                          <Link to='http://localhost:5173/home/profile' 
+                          <Link to={`http://localhost:5173/home/profile/${user.user._id}`}
 
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >

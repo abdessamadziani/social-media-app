@@ -17,7 +17,7 @@ const Follow = ({userdetails,fetchusers}) => {
           const accesstoken=user.token
           await axios.put(
           `http://localhost:5000/api/users/following/${id}`,
-          { userId: '65eae5ab7bd923690fe88857' }, // Body data
+          { userId: `${user.user._id}` }, // Body data
           {
             headers: {
               'Content-Type': 'application/json',

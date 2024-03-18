@@ -142,10 +142,10 @@ exports.signin =(req, res) => {
   
                console.log("good")
   
-            const { _id, fullname, email } = user;
+            const { _id, fullname, email,following,followers,username,gender,avatar } = user;
             res.json({
                 token,
-                user: { _id, fullname, email }
+                user: { _id, fullname, email,following,followers,username,gender,avatar }
   
             });
   

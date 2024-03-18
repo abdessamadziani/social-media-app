@@ -1,14 +1,17 @@
 import React from 'react'
 import imgface from '../../../shared/imgs/imgface.jpg'
+import {Link,useNavigate} from 'react-router-dom'
 import axios from 'axios';
 import { useState,useEffect } from 'react';
+import {useSelector } from 'react-redux'
 
 function LeftSideProfile() {
+    const {user}=useSelector((state)=>state.theUser)
 
     const [followingUsers,setFollowingUsers] = useState([]);
     const getAllFollowingUsers = async()=>{
         try {
-          const res = await axios.get(`http://localhost:5000/api/posts/following/65eae5ab7bd923690fe88857`)
+          const res = await axios.get(`http://localhost:5000/api/posts/following/${user.user._id}`)
           setFollowingUsers(res.data);
         } catch (error) {
           
@@ -52,7 +55,7 @@ function LeftSideProfile() {
     </div>
     <div class="flex flex-col items-center pb-10">
         <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src={imgface} alt="Bonnie image"/>
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Bonnie Green</h5>
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">{user.user.username}</h5>
         <span class="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
         <h5 class=" text-xl font-medium text-gray-900 dark:text-white mt-1">Bio</h5>
         <span class="text-sm text-gray-500 dark:text-gray-400 p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit vitae necessitatibus nulla expedita</span>
@@ -60,7 +63,9 @@ function LeftSideProfile() {
 
         <div class="flex mt-4 md:mt-6">
             <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit Bio</a>
-            <a href="#" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Settings</a>
+            <Link to='http://localhost:5173/home/setting'  class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Settings</Link>
+           
+                        
         </div>
     </div>
 </div>
@@ -134,7 +139,7 @@ function LeftSideProfile() {
               <div className="flex items-center justify-between mb-4">
                   <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Following</h5>
                   <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
-                      See all
+                      {user.user.following.length}
                   </a>
             </div>
           

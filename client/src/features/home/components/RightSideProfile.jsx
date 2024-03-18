@@ -4,14 +4,20 @@ import FriendRequest from './FriendRequest'
 import Follow from './RightSide/Follow'
 import axios from 'axios'
 import { useState,useEffect } from 'react'
+import {useSelector } from 'react-redux'
 
 function RightSideProfile() {
+    const {user}=useSelector((state)=>state.theUser)
 
-
+    const [followers,setFollowers] = useState([]);
     const [users,setUsers] = useState([]);
+
+
+
+
     const getAllUsers = async()=>{
         try {
-          const res = await axios.get(`http://localhost:5000/api/users/all/user/65eae5ab7bd923690fe88857`)
+          const res = await axios.get(`http://localhost:5000/api/users/all/user/${user.user._id}`)
           setUsers(res.data);
         } catch (error) {
           

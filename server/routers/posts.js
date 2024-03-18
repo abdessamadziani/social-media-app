@@ -140,7 +140,9 @@ router.get("/following/:id" , async(req , res)=>{
 
             let followingList=[];
             followinguser.map((person)=>{
-                  const {email, password ,active,friends,followers,following, address,bio, bdate, Following , Followers , ...others} = person._doc;
+                  // const {email, password ,active,following, address,bio, bdate , Followers , ...others} = person._doc;
+                  const {email, password , ...others} = person._doc;
+
                   followingList.push(others);
             })
 
@@ -162,7 +164,9 @@ router.get("/followers/:id" , async(req , res)=>{
 
             let followersList=[];
             followersuser.map((person)=>{
-                  const {email, password , bdate,active,friends,followers,following,address,bio , Following , Followers , ...others} = person._doc;
+                  // const {email, password , bdate,active,friends,address,bio , Following , Followers , ...others} = person._doc;
+                  const {email , ...others} = person._doc;
+
                   followersList.push(others);
             })
 

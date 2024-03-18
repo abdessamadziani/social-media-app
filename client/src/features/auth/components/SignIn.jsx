@@ -51,8 +51,7 @@ const submitSignIn = () => {
   //   },
   // })
         login(dispatch,user)
-        // const token =useSelector((state)=>state.theUser.user[0].token)
-        // alert(token)
+       
 
     .then(res => {
       // alert(res.data.token)

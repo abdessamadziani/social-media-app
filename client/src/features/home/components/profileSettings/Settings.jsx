@@ -3,7 +3,11 @@ import imgface from '../../../../shared/imgs/imgface.jpg'
 
 import './app.css'
 import NavBar from '../NavBar'
+import {useSelector } from 'react-redux'
+
 function Settings() {
+  const {user}=useSelector((state)=>state.theUser)
+
   return (
     <>
     <NavBar/>
@@ -40,7 +44,7 @@ function Settings() {
                     <div className="avatar mt-1.5 h-20 w-20">
                       <img
                         className="mask is-squircle"
-                        src={imgface}
+                        src={user.user.avatar}
                         alt="avatar"
                       />
                       <div
@@ -70,7 +74,7 @@ function Settings() {
                       <span className="relative mt-1.5 flex">
                         <input
                           className="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                          placeholder="Enter name"
+                          value={user.user.username}
                           type="text"
                         />
                         <span
@@ -85,7 +89,7 @@ function Settings() {
                       <span className="relative mt-1.5 flex">
                         <input
                           className="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                          placeholder="Enter full name"
+                          value={user.user.fullname}
                           type="text"
                         />
                         <span
@@ -100,7 +104,7 @@ function Settings() {
                       <span className="relative mt-1.5 flex">
                         <input
                           className="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                          placeholder="Enter email address"
+                          value={user.user.email}
                           type="text"
                         />
                         <span
@@ -111,12 +115,13 @@ function Settings() {
                       </span>
                     </label>
                     <label className="block">
-                      <span>Password</span>
+                      <span>Gender</span>
                       <span className="relative mt-1.5 flex">
                         <input
                           className="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                          value="password"
-                          type="password"
+                          value={user.user.gender}
+                          type="text"
+                          readOnly
                         />
                         <span
                           className="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent"
