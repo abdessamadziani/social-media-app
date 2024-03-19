@@ -36,6 +36,7 @@ const accessToken = currentUser.token
   const [count,setCount] = useState(post?.like.length)
   const [comments,setComments] = useState(post.comments)
   const [commentwriting, setCommentwriting] = useState('');
+ 
 
   const [show,setShow] = useState(false)
 
@@ -136,7 +137,10 @@ const accessToken = currentUser.token
         </div>
         
         <p className='text-black font-bold text-xs font-sans py-4'>{post.title}</p>
-           <img className='cover w-full rounded' src={post.image} alt="" />
+        {post.image !=='' ? <img className='cover w-full rounded' src={`${post.image}`} alt="" /> : post.video !== '' ?
+        <video className="cover w-full rounded" width="500" height="500" controls >
+          <source src={`${post.video}`} type="video/mp4"/>
+       </video> : '' }
             <div  className='flex justify-between mt-6'>
               <div  className='flex items-center   '>
 
