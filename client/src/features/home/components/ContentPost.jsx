@@ -142,7 +142,7 @@ const accessToken = currentUser.token
           <source src={`${post.video}`} type="video/mp4"/>
        </video> : '' }
             <div  className='flex justify-between mt-6'>
-              <div  className='flex items-center   '>
+              <div  className='flex items-center '>
 
                    <div className='text-gray-900  mx-4 cursor-pointer'>
                         <img className='w-7 h-7' src={Like} alt="like"  onClick={handleLike}/>
