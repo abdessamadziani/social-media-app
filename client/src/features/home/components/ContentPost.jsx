@@ -7,11 +7,13 @@ import unlike from '../../../shared/imgs/unlike.png'
 import share from '../../../shared/imgs/share.png'
 import commentsIcon from '../../../shared/imgs/comments.png'
 import { useState,useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 
 const ContentPost = ({post}) => {
 
-
+const currentUser = useSelector((state) => state.theUser.user)
+const accessToken = currentUser.token
   const [user,setUser] = useState({});
   useEffect(() => {
    const getUserOfPost = async()=>{
@@ -25,14 +27,16 @@ const ContentPost = ({post}) => {
    getUserOfPost();
   }, [])
 
+  
 
 
 
-  const [Like,setLike] = useState(post.like.includes("65eae5ab7bd923690fe88857") ? liked : like)
+  const [Like,setLike] = useState(post.like.includes(`${currentUser?.user?._id}`) ? liked : like)
   const [Dislike,setDislike] = useState(dislike)
-  const [count,setCount] = useState(post.like.length)
-  const [comment,setComment] = useState('')
-  const [comments,setComments] = useState([])
+  const [count,setCount] = useState(post?.like.length)
+  const [comments,setComments] = useState(post.comments)
+  const [commentwriting, setCommentwriting] = useState('');
+
   const [show,setShow] = useState(false)
 
   const handleShow = ()=>{
@@ -43,29 +47,60 @@ const ContentPost = ({post}) => {
 
   }
 
+  const handleComment = () =>{
+    addComment()
+  }
 
-  const addcomment = ()=>{
+  const addComment = async ()=>{
+
     const newComment = {
-      ' id': '0001',
-       'user': 'me',
-       'title': comment
+
+      'postId': `${post._id}`,
+      'comment': `${commentwriting}`,
+      'profileImage': `${currentUser.user.avatar}`,
+
      }
+
+    //  await axios.put(
+    //   'http://localhost:5000/api/posts/comment/post',
+    //   {
+    //     newComment
+    //   },
+
+    //   {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       Authorization: `Bearer ${accessToken}`
+    //     }
+    //   },
+
+    // );
+
+
+    await fetch(`http://localhost:5000/api/posts/comment/post` , {method:"PUT" , headers:{'Content-Type':"application/Json" , 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify(newComment)})
+
+    
+    
+     setCommentwriting(''),
      setComments([...comments,newComment])
-     setComment('')
      document.getElementById('comment').value=''
   }
+
+
+ 
+  
  
 
   const handleLike = async ()=>{
     if(Like === like)
       {
-        await fetch(`http://localhost:5000/api/posts/${post._id}/like` , {method:"PUT" , headers:{'Content-Type':"application/Json",Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZTVhYjdiZDkyMzY5MGZlODg4NTciLCJpYXQiOjE3MTA1MDM0OTF9.cKVPjooIqPV_kOm5D72V4_HGfTFP820wO1BuN72BC9Q"}})
+        await fetch(`http://localhost:5000/api/posts/${post._id}/like` , {method:"PUT" , headers:{'Content-Type':"application/Json",'Authorization':`Bearer ${accessToken}`}})
         setLike(liked)
         setCount(count + 1)
       }
       else
       {
-        await fetch(`http://localhost:5000/api/posts/${post._id}/like` , {method:"PUT" , headers:{'Content-Type':"application/Json",Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVhZTVhYjdiZDkyMzY5MGZlODg4NTciLCJpYXQiOjE3MTA1MDM0OTF9.cKVPjooIqPV_kOm5D72V4_HGfTFP820wO1BuN72BC9Q"}})
+        await fetch(`http://localhost:5000/api/posts/${post._id}/like` , {method:"PUT" , headers:{'Content-Type':"application/Json",'Authorization': `Bearer ${accessToken}`}})
         setLike(like)
         setCount(count - 1)
 
@@ -88,7 +123,7 @@ const ContentPost = ({post}) => {
         <div style={{height:'800px'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 overflow-y-auto scroll-smooth	 	 	">
         <div className="flex items-center">
                     <div className="flex-shrink-0">
-                        <img className="w-8 h-8 rounded-full" src={imgface} alt="Neil image"/>
+                        <img className="w-8 h-8 rounded-full" src={user?.avatar} alt="Neil image"/>
                     </div>
                     <div className="flex-1 min-w-0 ms-4">
                         <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
@@ -131,7 +166,7 @@ const ContentPost = ({post}) => {
       {show === true ? (
             <div className='flex mt-6 '>
                 <div className="flex-shrink-0">
-                    <img className="w-8 h-8 rounded-full" src={imgface} alt="Neil image"/>
+                    <img className="w-8 h-8 rounded-full" src={currentUser?.user?.avatar} alt="Neil image"/>
                 </div>
                 <input
                     type="text"
@@ -139,9 +174,9 @@ const ContentPost = ({post}) => {
                     id="comment"
                     className="block flex-1 border-0  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="Write a comment ..."
-                    onChange={(e)=>setComment(e.target.value)}
+                    onChange={(e)=>setCommentwriting(e.target.value)}
                   />
-                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={addcomment}>
+                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={handleComment}>
                  Add comment
                </button>
             </div>
@@ -151,14 +186,14 @@ const ContentPost = ({post}) => {
                return(
                   <div  key={index} className="flex items-center mt-4   	">
                   <div className="flex-shrink-0">
-                      <img className="w-8 h-8 rounded-full" src={imgface} alt="Neil image"/>
+                      <img className="w-8 h-8 rounded-full" src={item.profileImage} alt="Neil image"/>
                   </div>
                   <div className="flex-1 min-w-0 ms-4">
                       <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          {item.user}
+                          {item.username}
                       </p>
                       <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          {item.title}
+                          {item.comment}
                       </p>
                   </div>
                   <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">

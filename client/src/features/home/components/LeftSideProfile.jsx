@@ -8,7 +8,7 @@ import {useSelector } from 'react-redux'
 function LeftSideProfile() {
     const {user}=useSelector((state)=>state.theUser)
 
-   
+   const accesstoken = user.token
 
 
 
@@ -53,10 +53,10 @@ function LeftSideProfile() {
     const [Follow , setUnFollow] = useState([user?.user?.following.includes(id) ? "Unfollow" : "Follow"]);
     const handleFollow = async()=>{
         if(Follow === "Follow"){
-          await fetch(`http://localhost:5000/api/users/following/${id}` , {method:'PUT', headers:{'Content-Type':"application/JSON" , token:accessToken} , body:JSON.stringify({user:`${user.other._id}`})})
+          await fetch(`http://localhost:5000/api/users/following/${id}` , {method:'PUT', headers:{'Content-Type':"application/JSON" ,'Authorization': `Bearer ${accesstoken}`} , body:JSON.stringify({userId:`${user.user._id}`})})
           setUnFollow("UnFollow")
         }else{
-          await fetch(`http://localhost:5000/api/users/following/${id}` , {method:'PUT', headers:{'Content-Type':"application/JSON" , token:accessToken} , body:JSON.stringify({user:`${user.other._id}`})})
+          await fetch(`http://localhost:5000/api/users/following/${id}` , {method:'PUT', headers:{'Content-Type':"application/JSON" ,'Authorization': `Bearer ${accesstoken}`} , body:JSON.stringify({userId:`${user.user._id}`})})
           setUnFollow("Follow")
         }
       }
@@ -100,8 +100,7 @@ function LeftSideProfile() {
 
 
         <div class="flex mt-4 md:mt-6">
-            {user?.user?._id !== id ? <div onClick={handleFollow}><button className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>Follow</button></div> : <div><button className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>Edit Bio</button></div> }
-
+            {user?.user?._id !== id ? <div onClick={handleFollow}><button className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>{Follow}</button></div> : <div><button className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>Edit Bio</button></div> }
             <Link to='http://localhost:5173/home/setting'  class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Settings</Link>
            
                         

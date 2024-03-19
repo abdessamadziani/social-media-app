@@ -96,15 +96,16 @@ router.put("/:id/dislike" ,verifyToken, async(req , res)=>{
 //Comment 
 router.put("/comment/post" , verifyToken , async(req , res)=>{
        try {
-            const {comment , postId , profileImage} = req.body;
-            const comments={
+            const {postId,comment,profileImage} = req.body;
+            const commentObj={
                   userId:req.profile.id,
                   username:req.profile.username,
                   comment,
-                  profileImage
+                  profileImage,
             }
             const post = await Post.findById(postId);
-            post.comments.push(comments);
+            console.log('xxxxxxxxxx::::::::::',commentObj)
+            post.comments.push(commentObj);
             await post.save();
             res.status(200).json(post);
       } catch (error) {
