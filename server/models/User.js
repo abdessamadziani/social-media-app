@@ -6,17 +6,14 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     fullname: {
         type: String,
-        required: true,
         trim: true,
         lowercase: true,
       },
       username: {
         type: String,
-        required: true,
         trim: true,
         // unique:true,
         lowercase: true,
-        default:'wwwsshhhhxssdxwswvw'
       },
       email: {
         type: String,

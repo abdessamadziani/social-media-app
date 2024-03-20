@@ -2,9 +2,10 @@ import { Fragment } from 'react';
 import {Link,useNavigate} from 'react-router-dom'
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import imgface from '../../../shared/imgs/imgface.jpg'
 import {useDispatch,useSelector } from 'react-redux';
 import { logout } from '../../../redux/userSlice';
+import { useState,useEffect } from 'react';
+import axios from 'axios';
 
 
 import Swal from 'sweetalert2'; // Import the main SweetAlert2 module
@@ -26,7 +27,29 @@ export default function NavBar() {
   const {user} = useSelector((state)=>state.theUser)
   const dispatch = useDispatch()
 
+  const [userDetails, setUserDetails] = useState();
+  // const [userImg, setUserImg] = useState(user.user.avatar);
 
+  const getUserDetails = async () => {
+    try {
+       
+        const res = await axios.get(
+        `http://localhost:5000/api/users/user/details/${user?.user._id}`,
+       
+      );
+      setUserDetails(res.data)
+      
+    } catch (error) {
+      // Handle errors
+      console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    getUserDetails()
+   }, [])
+
+   console.log("userDetails:::::::",userDetails)
   const navigate=useNavigate()
 
 
@@ -124,7 +147,7 @@ export default function NavBar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={user?.user?.avatar}
+                        src={userDetails?.avatar}
                         alt=""
                       />
                     </Menu.Button>

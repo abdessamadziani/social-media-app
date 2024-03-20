@@ -7,6 +7,7 @@ const {
   reset,
   followingUser,
   userDetailsFromPost,
+  userDetails ,
    getUsersToFollow,
    editUser,
    signout
@@ -37,6 +38,8 @@ router.put("/following/:id" , verifyToken ,followingUser)
 router.put("/edit/user/:id" , verifyToken ,editUser)
 
 router.get("/post/user/details/:id",userDetailsFromPost)
+
+router.get("/user/details/:id",userDetails)
 
 router.get("/all/user/:id", getUsersToFollow)
 

@@ -287,6 +287,25 @@ exports.userDetailsFromPost = async(req , res)=>{
 
 
 
+exports.userDetails = async(req , res)=>{
+    try {
+        const user = await User.findById(req.params.id);
+        if(!user){
+            return res.status(400).json("User not found")
+        }
+        const {password ,address,search , ...others}=user._doc;
+        res.status(200).json(others);
+    } catch (error) {
+        return res.status(500).json("Internal server error")
+    }
+}
+
+
+
+
+
+
+
 
 exports.editUser = async (req, res) => {
     try {
@@ -294,11 +313,11 @@ exports.editUser = async (req, res) => {
         if (!user) {
             return res.status(400).json("User not found");
         }
-        const { username, fullname } = req.body;
+        const { username, fullname ,avatar } = req.body;
         // Update the user object with new values
         user.username = username;
         user.fullname = fullname;
-        // user.avatar = avatar;
+        user.avatar = avatar;
         
         // Save the updated user object
         const updatedUser = await user.save();
