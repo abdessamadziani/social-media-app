@@ -4,9 +4,36 @@ import imgface from '../../../../shared/imgs/imgface.jpg'
 import './app.css'
 import NavBar from '../NavBar'
 import {useSelector } from 'react-redux'
+import axios from 'axios'
+import { useState,useEffect } from 'react'
 
 function Settings() {
   const {user}=useSelector((state)=>state.theUser)
+  const accessToken = user.token
+  const [username, setUserName] = useState('');
+  const [fullname, setFullName] = useState('');
+  // const [avatar, setAvatar] = useState('');
+
+
+
+  const handleEdit = async ()=>{
+    try {
+      const res = await axios.put(`http://localhost:5000/api/users/edit/user/${user?.user._id}`,
+      {
+        username,fullname
+      },
+      
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${accessToken}`
+        }
+      })
+      setUser(res.data);
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <>
@@ -30,6 +57,7 @@ function Settings() {
                     </button>
                     <button
                       className="btn min-w-[7rem] rounded-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90"
+                     onClick={handleEdit}
                     >
                       Save
                     </button>
@@ -46,6 +74,7 @@ function Settings() {
                         className="mask is-squircle"
                         src={user.user.avatar}
                         alt="avatar"
+                        onChange={(e)=>setAvatar(e.target.files[0])}
                       />
                       <div
                         className="absolute bottom-0 right-0 flex items-center justify-center rounded-full bg-white dark:bg-navy-700"
@@ -74,8 +103,10 @@ function Settings() {
                       <span className="relative mt-1.5 flex">
                         <input
                           className="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                          value={user.user.username}
+                          defaultValue={user.user.username}
                           type="text"
+                          onChange={(e)=>setUserName(e.target.value)}
+
                         />
                         <span
                           className="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent"
@@ -89,8 +120,10 @@ function Settings() {
                       <span className="relative mt-1.5 flex">
                         <input
                           className="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                          value={user.user.fullname}
+                          defaultValue={user.user.fullname}
                           type="text"
+                          onChange={(e)=>setFullName(e.target.value)}
+
                         />
                         <span
                           className="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent"
@@ -104,7 +137,7 @@ function Settings() {
                       <span className="relative mt-1.5 flex">
                         <input
                           className="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                          value={user.user.email}
+                          defaultValue={user.user.email}
                           type="text"
                         />
                         <span
@@ -119,7 +152,7 @@ function Settings() {
                       <span className="relative mt-1.5 flex">
                         <input
                           className="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                          value={user.user.gender}
+                          defaultValue={user.user.gender}
                           type="text"
                           readOnly
                         />

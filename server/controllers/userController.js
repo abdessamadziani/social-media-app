@@ -285,6 +285,34 @@ exports.userDetailsFromPost = async(req , res)=>{
     }
 }
 
+
+
+
+exports.editUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(400).json("User not found");
+        }
+        const { username, fullname } = req.body;
+        // Update the user object with new values
+        user.username = username;
+        user.fullname = fullname;
+        // user.avatar = avatar;
+        
+        // Save the updated user object
+        const updatedUser = await user.save();
+        
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json("Internal server error");
+    }
+}
+
+
+
+
 //get users to follow
 exports.getUsersToFollow= async(req , res)=>{
     try {

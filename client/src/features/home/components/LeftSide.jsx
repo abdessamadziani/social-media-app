@@ -12,7 +12,7 @@ const LeftSide = () => {
     useEffect(() => {
         const getPost = async () => {
             try {
-                const res = await axios.get(`http://localhost:5000/api/posts/flw/${user.user._id}`)
+                const res = await axios.get(`http://localhost:5000/api/posts/flw/${user?.user._id}`)
                 setPost(res.data);
             } catch (error) {
                 // Handle error

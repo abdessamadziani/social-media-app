@@ -8,6 +8,7 @@ const {
   followingUser,
   userDetailsFromPost,
    getUsersToFollow,
+   editUser,
    signout
 } = require("../controllers/userController");
 const { userById } = require("../middleware/user");
@@ -32,6 +33,8 @@ router.get('/signout',signout)
 
 //Following 
 router.put("/following/:id" , verifyToken ,followingUser)
+
+router.put("/edit/user/:id" , verifyToken ,editUser)
 
 router.get("/post/user/details/:id",userDetailsFromPost)
 
