@@ -43,39 +43,9 @@ const LeftSide = () => {
           
             <div style={{ display: 'grid',gridTemplateColumns: '1fr 1fr 1fr'}} className="  gap-4 ">
                  {post.map((image,index) => (
-                    <img key={index} className="w-18 h-18 rounded-lg " src={image.image} alt="Neil image"/>
+
+                     image.image === '' ? '' : <img key={index} className="w-18 h-18 rounded-lg " src={image.image} alt="Neil image"/>
                 ))}
-                    {/* <div className="">
-                        <img className="w-18 h-18 rounded-lg " src={imgface} alt="Neil image"/>
-                    </div>
-                      <div className="">
-                        <img className="w-18 h-18   rounded-lg " src={imgface} alt="Neil image"/>
-                    </div>
-                    <div className="w-1/3">
-                        <img className="w-18 h-18  rounded-lg " src={imgface} alt="Neil image"/>
-                    </div> 
-
-
-                    <div className="">
-                        <img className="w-18 h-18 rounded-lg " src={imgface} alt="Neil image"/>
-                    </div>
-                      <div className="">
-                        <img className="w-18 h-18   rounded-lg " src={imgface} alt="Neil image"/>
-                    </div>
-                    <div className="">
-                        <img className="w-18 h-18  rounded-lg " src={imgface} alt="Neil image"/>
-                    </div> 
-
-                    <div className="">
-                        <img className="w-18 h-18 rounded-lg " src={imgface} alt="Neil image"/>
-                    </div>
-                      <div className="">
-                        <img className="w-18 h-18   rounded-lg " src={imgface} alt="Neil image"/>
-                    </div>
-                    <div className="">
-                        <img className="w-18 h-18  rounded-lg " src={imgface} alt="Neil image"/>
-                    </div>  */}
-
             </div>
 
           </div>
