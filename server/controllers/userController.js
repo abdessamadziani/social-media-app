@@ -278,6 +278,7 @@ exports.userDetailsFromPost = async(req , res)=>{
         if(!user){
             return res.status(400).json("User not found")
         }
+
         const {email , password , bdate,role,friends,address,search , ...others}=user._doc;
         res.status(200).json(others);
     } catch (error) {
@@ -313,6 +314,7 @@ exports.editUser = async (req, res) => {
         if (!user) {
             return res.status(400).json("User not found");
         }
+        
         const { username, fullname ,avatar } = req.body;
         // Update the user object with new values
         user.username = username;
@@ -320,9 +322,13 @@ exports.editUser = async (req, res) => {
         user.avatar = avatar;
         
         // Save the updated user object
+        
+        const token = jwt.sign({ _id: user._id }, process.env.jwt_SECRET);
+        res.cookie('token', token, { expires: new Date(Date.now() + 600000) });
+
         const updatedUser = await user.save();
         
-        res.status(200).json(updatedUser);
+        res.status(200).json({token, user: updatedUser});
     } catch (error) {
         console.error(error);
         return res.status(500).json("Internal server error");

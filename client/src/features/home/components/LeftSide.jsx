@@ -16,7 +16,7 @@ const LeftSide = () => {
                 setPost(res.data);
             } catch (error) {
                 // Handle error
-                console.error("Error fetching posts:", error);
+                // console.error("Error fetching posts:", error);
             }
         };
         

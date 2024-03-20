@@ -17,7 +17,19 @@ export const userSlice = createSlice({
       state.isFetching = false,
       state.user=action.payload
     },
+  
     loginError: (state) => {
+      state.isFetching=false,
+      state.error = true
+    },
+    editStart: (state) => {
+      state.isFetching=true
+   },
+    editSuccess: (state,action) => {
+      state.isFetching = false,
+      state.user = action.payload
+    },
+    editError: (state) => {
       state.isFetching=false,
       state.error = true
     },
@@ -25,10 +37,11 @@ export const userSlice = createSlice({
         state.isFetching=false,
         state.user = {}
       },
+   
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { loginStart,loginSuccess,loginError,logout } = userSlice.actions
+export const { loginStart,loginSuccess,loginError,editStart,editSuccess,editError,logout } = userSlice.actions
 
 export default userSlice.reducer

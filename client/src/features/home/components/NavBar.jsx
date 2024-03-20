@@ -27,29 +27,27 @@ export default function NavBar() {
   const {user} = useSelector((state)=>state.theUser)
   const dispatch = useDispatch()
 
-  const [userDetails, setUserDetails] = useState();
-  // const [userImg, setUserImg] = useState(user.user.avatar);
-
-  const getUserDetails = async () => {
-    try {
+  // const [userDetails, setUserDetails] = useState();
+  // const getUserDetails = async () => {
+  //   try {
        
-        const res = await axios.get(
-        `http://localhost:5000/api/users/user/details/${user?.user._id}`,
+  //       const res = await axios.get(
+  //       `http://localhost:5000/api/users/user/details/${user?.user._id}`,
        
-      );
-      setUserDetails(res.data)
+  //     );
+  //     setUserDetails(res.data)
       
-    } catch (error) {
-      // Handle errors
-      console.error('Error:', error);
-    }
-  };
+  //   } catch (error) {
+  //     // Handle errors
+  //     // console.error('Error:', error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getUserDetails()
-   }, [])
+  // useEffect(() => {
+  //   getUserDetails()
+  // }, [])
 
-   console.log("userDetails:::::::",userDetails)
+  //  console.log("userDetails:::::::",userDetails)
   const navigate=useNavigate()
 
 
@@ -147,7 +145,7 @@ export default function NavBar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src={userDetails?.avatar}
+                        src={user?.user.avatar}
                         alt=""
                       />
                     </Menu.Button>
@@ -165,7 +163,7 @@ export default function NavBar() {
                       <Menu.Item>
                         {({ active }) => (
                           
-                          <Link to={`http://localhost:5173/home/profile/${user?.user?._id}`}
+                          <Link to={`http://localhost:5173/home/profile/${user?.user._id}`}
 
                             className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                           >

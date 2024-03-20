@@ -20,8 +20,28 @@ const MainPost = () => {
   const [file2, setFile2] = useState(null);
   const [title, setTitle] = useState('');
 
-  console.log("file",file?.name)
-  console.log("file222",file2?.name)
+
+  const [userDetails, setUserDetails] = useState();
+  const getUserDetails = async () => {
+    try {
+       
+        const res = await axios.get(
+        `http://localhost:5000/api/users/user/details/${user?.user._id}`,
+       
+      );
+      setUserDetails(res.data)
+      
+    } catch (error) {
+      // Handle errors
+      // console.error('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    getUserDetails()
+  }, [])
+
+
 
   const handlePost = (e)=>{
     e.preventDefault();
@@ -136,7 +156,7 @@ const MainPost = () => {
         <div style={{width:'100%'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
             <div className='flex'>
                 <div className="flex-shrink-0">
-                    <img className="w-8 h-8 rounded-full" src={user?.user?.avatar} alt="Neil image"/>
+                    <img className="w-8 h-8 rounded-full" src={userDetails?.avatar} alt="Neil image"/>
                 </div>
                 <input
                     type="text"

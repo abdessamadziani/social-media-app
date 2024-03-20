@@ -2,7 +2,8 @@ import React from 'react'
 
 import './app.css'
 import NavBar from '../NavBar'
-import {useSelector } from 'react-redux'
+import {editUserProfileWithImage} from '../../../../redux/api'
+import {useSelector,useDispatch } from 'react-redux'
 import axios from 'axios'
 import { useState,useEffect } from 'react'
 import { useForm } from "react-hook-form"
@@ -11,8 +12,8 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/
 
 
 function Settings() {
-
-
+const dispatch = useDispatch();
+const {isFetching ,error} = useSelector((state)=>state.theUser)
 
   const {
     register,
@@ -22,55 +23,20 @@ function Settings() {
 
 
   const {user}=useSelector((state)=>state.theUser)
+  
   const accessToken = user.token
-  const [username, setUserName] = useState('');
+   const [username, setUserName] = useState('');
+
   const [fullname, setFullName] = useState('');
   const [userDetails, setUserDetails] = useState();
-  // const [avatar, setAvatar] = useState('');
-
-
 
   const [file, setFile] = useState(null)
 
 
-//   if(file !== null){
-//     const fileName = new Date().getTime() + file?.name;
-//     const storage = getStorage(app);
-//     const StorageRef = ref(storage,fileName);
-    
-//     const uploadTask = uploadBytesResumable(StorageRef, file);
-//     uploadTask.on('state_changed', 
-//   (snapshot) => {
-//     // Observe state change events such as progress, pause, and resume
-//     // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-//     const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-//     console.log('Upload is ' + progress + '% done');
-//     switch (snapshot.state) {
-//       case 'paused':
-//         console.log('Upload is paused');
-//         break;
-//       case 'running':
-//         console.log('Upload is running');
-//         break;
-//     }
-//   }, 
-//   (error) => {
-//     // Handle unsuccessful uploads
-//   }, 
-//   () => {
-//     // Handle successful uploads on complete
-//     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-//     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-//       fetch(`http://localhost:5000/api/users/edit/user/${user?.user._id}` , {method:"PUT" , headers:{'Content-Type':"application/JSON", 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({ username,fullname, avatar:downloadURL})}).then((data)=>{
-//         alert("Your profile  updated successfully");
-//         // window.location.reload(true)
-//       })
-//     });
-//   }
-// );}
 
 
-  const handleEdit = async ()=>{
+
+  const handleEdit = async () => {
     try {
      
       if(file !== null){
@@ -101,14 +67,18 @@ function Settings() {
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-           const res = fetch(`http://localhost:5000/api/users/edit/user/${user?.user._id}` , {method:"PUT" , headers:{'Content-Type':"application/JSON", 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({ username,fullname, avatar:downloadURL})
-              }).then((data)=>{
+          //  const res = fetch(`http://localhost:5000/api/users/edit/user/${user?.user._id}` , {method:"PUT" , headers:{'Content-Type':"application/JSON", 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({ username,fullname, avatar:downloadURL})
+          //     }).then((data)=>{
             
-            alert("Your profile  updated successfully");
-         
-             window.location.reload(true)
-          })
+          //   alert("Your profile  updated successfully");
+          //   getUserDetails()
+
+          //   //  window.location.reload(true)
+          // })
         
+          console.log("xxx::::::",user?.user._id , username , fullname , downloadURL)
+          editUserProfileWithImage(dispatch,user?.user?._id,username,fullname,downloadURL,accessToken)
+          console.log("after")
 
         });
       }
@@ -118,9 +88,8 @@ function Settings() {
 
     else
     {
-       const res = fetch(`http://localhost:5000/api/users/edit/user/${user?.user._id}` , {method:"PUT" , headers:{'Content-Type':"application/JSON", 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({ username,fullname, avatar:user.user.avatar})})
+       const res = fetch(`http://localhost:5000/api/users/edit/user/${user?.user_id}` , {method:"PUT" , headers:{'Content-Type':"application/JSON", 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({ username,fullname, avatar:userDetails.avatar})})
       setUser(res.data);
-      getUserDetails()
     }
 
 
@@ -135,26 +104,29 @@ function Settings() {
 
 
 
-  const getUserDetails = async () => {
-    try {
-       
-       const res = await axios.get(
-        `http://localhost:5000/api/users/user/details/${user?.user._id}`,
-       
-      );
-      setUserDetails(res.data)
-      
-    } catch (error) {
-      // Handle errors
-      console.error('Error:', error);
-    }
-  };
+ 
 
   useEffect(() => {
+    const getUserDetails = async () => {
+      try {
+         
+         const res = await axios.get(
+          `http://localhost:5000/api/users/user/details/${user?.user._id}`,
+         
+        );
+        setUserDetails(res.data)
+        
+      } catch (error) {
+        // Handle errors
+        // console.error('Error:', error);
+      }
+    };
     getUserDetails()
    }, [])
 
-  
+
+
+   console.log("dd",userDetails)
 
 
   return (
@@ -194,9 +166,9 @@ function Settings() {
                     <div className="avatar mt-1.5 h-20 w-20">
                       <img
                         className="mask is-squircle"
-                        src={userDetails?.avatar}
+                        src={user?.user.avatar}
                         alt="avatar"
-                        onChange={(e)=>setFile(e.target.files[0])}
+                        //  onChange={(e)=>setFile(e.target.files[0])}
                       />
                       <div
                         className="absolute bottom-0 right-0 flex items-center justify-center rounded-full bg-white dark:bg-navy-700"
@@ -275,7 +247,7 @@ function Settings() {
                       <span className="relative mt-1.5 flex">
                         <input
                           className="form-input peer w-full rounded-full border border-slate-300 bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent"
-                          defaultValue={user.user.gender}
+                          defaultValue={user?.user.gender}
                           type="text"
                           readOnly
                         />
@@ -321,6 +293,5 @@ function Settings() {
   </>
   )
 }
-
 export default Settings
 
