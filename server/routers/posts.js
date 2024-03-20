@@ -41,12 +41,17 @@ router.put("/update/post/:id" , verifyToken , async(req ,res)=>{
                    if(!post){
                     return res.status(400).json("Post does not found")
                    };
-                   
+                   if((post.userId).toString() === req.profile.id){
+
                    post = await Post.findByIdAndUpdate(req.params.id , {
                     $set:req.body
                    },{new: true})
                    let updatepost = await post.save();
-                   res.status(200).json(updatepost);
+                   res.status(200).json(updatepost);}
+                   else {
+                        return res.status(400).json("You are not allow to delete this post")
+
+                   }
           } catch (error) {
                    return res.status(500).json("Internal error occured") 
           }
