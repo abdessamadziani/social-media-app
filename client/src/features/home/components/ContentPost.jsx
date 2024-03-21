@@ -6,6 +6,9 @@ import dislike from '../../../shared/imgs/dislike.png'
 import unlike from '../../../shared/imgs/unlike.png'
 import share from '../../../shared/imgs/share.png'
 import commentsIcon from '../../../shared/imgs/comments.png'
+import pen from '../../../shared/imgs/pen.png'
+import deleteIcon from '../../../shared/imgs/delete.png'
+
 import {Fragment, useRef, useState,useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
@@ -123,10 +126,14 @@ const handleSubmitEdit = async(event) => {
 
 
   const [Like,setLike] = useState(post.like.includes(`${currentUser?.user?._id}`) ? liked : like)
-  const [Dislike,setDislike] = useState(dislike)
-  const [count,setCount] = useState(post?.like.length)
+  // const [Dislike,setDislike] = useState(post.dislike.includes(`${currentUser?.user?._id}`) ? unlike : dislike)
+  const [likeCount,setLikeCount] = useState(post?.like.length)
+  // const [DislikeCount,setDislikeCount] = useState(post?.dislike.length)
+
   const [comments,setComments] = useState(post.comments)
   const [commentwriting, setCommentwriting] = useState('');
+  const [editedComment, setEditedComment] = useState('');
+
 
 
   const [isOpen, setIsOpen] = useState(false);
@@ -175,6 +182,41 @@ const handleSubmitEdit = async(event) => {
   }
 
 
+
+
+  const deleteComment = async (id)=>{
+
+    const deletedComment = {
+
+      'postId': `${post._id}`,
+      'commentId': `${id}`,
+
+     }
+
+   
+     await fetch(`http://localhost:5000/api/posts/delete/comment` , {method:"PUT" , headers:{'Content-Type':"application/Json" , 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({postId: deletedComment.postId , commentId:deletedComment.commentId})})
+
+  
+  }
+
+
+  // const editComment = async (id)=>{
+
+  //   const commentObg = {
+
+  //     'postId': `${post._id}`,
+  //     'commentId': `${id}`,
+  //     'editedComment': editedComment
+
+  //    }
+
+   
+  //    await fetch(`http://localhost:5000/api/posts/edit/comment` , {method:"PUT" , headers:{'Content-Type':"application/Json" , 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({postId:commentObg.postId , commentId:commentObg.commentId , editedComment})})
+
+  
+  // }
+
+
  
 
   const handleLike = async ()=>{
@@ -182,27 +224,38 @@ const handleSubmitEdit = async(event) => {
       {
         await fetch(`http://localhost:5000/api/posts/${post._id}/like` , {method:"PUT" , headers:{'Content-Type':"application/Json",'Authorization':`Bearer ${accessToken}`}})
         setLike(liked)
-        setCount(count + 1)
+        setLikeCount(likeCount + 1)
+
+          // post.dislike.includes(`${currentUser?.user?._id}`) ? (setDislike(dislike),setDislikeCount(post?.dislike.length - 1)) : null
+
       }
       else
       {
         await fetch(`http://localhost:5000/api/posts/${post._id}/like` , {method:"PUT" , headers:{'Content-Type':"application/Json",'Authorization': `Bearer ${accessToken}`}})
         setLike(like)
-        setCount(count - 1)
+        setLikeCount(likeCount - 1)
 
       }
   }
 
-  const handleDislike = ()=>{
-    if(Dislike === dislike)
-      {
-        setDislike(unlike)
-      }
-      else
-      {
-        setDislike(dislike)
-      }
-  }
+  // const handleDislike = async ()=>{
+  // if(Dislike === dislike)
+  //   {
+  //   await fetch(`http://localhost:5000/api/posts/${post._id}/dislike` , {method:"PUT" , headers:{'Content-Type':"application/Json",'Authorization':`Bearer ${accessToken}`}})
+  //   setDislike(unlike)
+  //   setDislikeCount(DislikeCount + 1)
+  //   // post.like.includes(`${currentUser?.user?._id}`) ? alert("yess") (setLike(like),setLikeCount(post?.like.length - 1)) :null
+
+
+  // }
+  // else
+  // {
+  //   await fetch(`http://localhost:5000/api/posts/${post._id}/dislike` , {method:"PUT" , headers:{'Content-Type':"application/Json",'Authorization': `Bearer ${accessToken}`}})
+  //   setDislike(dislike)
+  //   setDislikeCount(DislikeCount - 1)
+
+  // }
+  // }
   return (
     <>
     <div style={{width:'100%',marginTop:20,marginBottom:20}} className='text-white'>
@@ -224,6 +277,7 @@ const handleSubmitEdit = async(event) => {
                     </div>
 
             {/* <div className="flex justify-end px-4 pt-4"> */}
+
             {isButtonVisible === true ?   <button
                 id="dropdownButton"
                 onClick={toggleDropdown}
@@ -265,12 +319,12 @@ const handleSubmitEdit = async(event) => {
 
                    <div className='text-gray-900  mx-4 cursor-pointer'>
                         <img className='w-7 h-7' src={Like} alt="like"  onClick={handleLike}/>
-                        <p>{count} Likes</p>
+                        <p>{likeCount} Likes</p>
                    </div> 
-                   <div className='text-gray-900  mx-4 cursor-pointer'>
+                   {/* <div className='text-gray-900  mx-4 cursor-pointer'>
                         <img className='w-6 h-6' src={Dislike} alt="dislike"  onClick={handleDislike}/>
-                        <p> Dislikes</p>
-                   </div> 
+                        <p> {DislikeCount} Dislikes</p>
+                   </div>  */}
 
                    <div className='text-gray-900 mx-4  cursor-pointer'>
                    <img className='w-6 h-6' src={commentsIcon} alt="comment" onClick={handleShow} />
@@ -319,9 +373,11 @@ const handleSubmitEdit = async(event) => {
                           {item.comment}
                       </p>
                   </div>
-                  <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                      ...
+                  <div className=" cursor-pointer inline-flex items-center text-base font-semibold text-gray-900 dark:text-white" >
+                     <img className='w-4 h-4 cursor-pointer mx-3' src={deleteIcon} alt="deleteIcon"  onClick={(e)=>{deleteComment(item._id)}}/>
+                     {/* <img className='w-4 h-4 cursor-pointer' src={pen} alt="editIcon"  onClick={(e)=>{editComment(item._id)}}/> */}
                   </div>
+                 
                   </div>
                 )})}
 

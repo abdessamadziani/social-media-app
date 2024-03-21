@@ -118,6 +118,57 @@ router.put("/comment/post", verifyToken, async (req, res) => {
   }
 });
 
+
+router.put("/delete/comment", verifyToken, async (req, res) => {
+  try {
+    const { postId,commentId } = req.body;
+    console.log(postId,commentId)
+
+    // Check if postId and commentId are provided
+    if (!commentId) {
+      return res.status(400).json({ error: "commentId are required" });
+    }
+
+
+    const post = await Post.findById(postId);
+
+    // Check if post with given postId exists
+    if (!post) {
+      return res.status(404).json({ error: "Post not found" });
+    }
+
+   console.log(post.userId.toHexString())
+
+
+    // Check if commentId exists in post's comments array
+   
+    const commentIndex = post.comments.findIndex(comment => comment._id.toHexString() === commentId && comment.userId.toHexString() === req.profile.id);
+    if (commentIndex === -1) {
+      return res.status(404).json({ error: "Comment not found or you dont have access" });
+    }
+    
+    // const commentIndexx2 = post.comments.findIndex(comment =>  comment.userId.toHexString() === req.profile.id);
+    // if (commentIndexx2 === -1) {
+    //   return res.status(404).json({ error: "u dont have access to delete this comment" });
+    // }
+
+    // Remove comment from comments array
+    
+    post.comments.splice(commentIndex, 1);
+
+    // Save the updated post
+    await post.save();
+
+    // Send success response
+    res.status(200).json({ message: "Comment deleted successfully" });
+  } catch (error) {
+    // Handle any errors
+    console.error("Error deleting comment:", error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+
 //Delete post
 router.delete("/delete/post/:id", verifyToken, async (req, res) => {
   try {
