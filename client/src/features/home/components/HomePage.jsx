@@ -4,6 +4,7 @@ import NavBar from './NavBar'
 import LeftSide from './LeftSide'
 import RightSide from './RightSide/RightSide'
 import MainPost from './MainPost'
+import {LampDemo} from '../../auth/components/ui/lamp'
 const HomePage = () => {
   return (
     <>

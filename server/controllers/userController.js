@@ -336,6 +336,26 @@ exports.editUser = async (req, res) => {
 }
 
 
+exports.editUserBio = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (!user) {
+            return res.status(400).json("User not found");
+        }
+        
+        const { bio } = req.body;
+        // Update the user object with new values
+        user.bio = bio;
+    
+        const updatedUserBio = await user.save();
+        
+        res.status(200).json(updatedUserBio);
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json("Internal server error");
+    }
+}
+
 
 
 //get users to follow

@@ -23,7 +23,6 @@ const LeftSide = () => {
         getPost();
     }, []); // Empty dependency array means this effect runs only once after the component mounts
 
-    console.log("kk", post); // Log the post state to the console
 
 
    

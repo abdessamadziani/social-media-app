@@ -262,7 +262,7 @@ const handleSubmitEdit = async(event) => {
 
 
       
-        <div style={{height:'800px'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 overflow-y-auto scroll-smooth	 	 	">
+        <div style={{maxHeight:'800px'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 overflow-y-auto scroll-smooth	 	 	">
         <div className="flex items-center">
                     <div className="flex-shrink-0">
                         <img className="w-8 h-8 rounded-full" src={user?.avatar} alt="Neil image"/>
@@ -310,8 +310,8 @@ const handleSubmitEdit = async(event) => {
         </div>
         
         <p className='text-black font-bold text-xs font-sans py-4'>{post.title}</p>
-        {post.image !=='' ? <img className='cover w-full rounded' src={`${post.image}`} alt="" /> : post.video !== '' ?
-        <video className="cover w-full rounded" width="500" height="500" controls >
+        {post.image !=='' ? <div className='cover' style={{height:400}}> <img className='cover w-full h-auto rounded object-cover' style={{width:'100%',height:'100%'}} src={`${post.image}`} alt="" /> </div>: post.video !== '' ?
+        <video className="cover w-full rounded" width="500" height="400" controls >
           <source src={`${post.video}`} type="video/mp4"/>
        </video> : '' }
             <div  className='flex justify-between mt-6'>

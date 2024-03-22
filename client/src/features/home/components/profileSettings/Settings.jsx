@@ -9,6 +9,7 @@ import { useState,useEffect } from 'react'
 import { useForm } from "react-hook-form"
 import app from '../../../../firebase'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { LampDemo } from '../../../auth/components/ui/lamp'
 
 
 function Settings() {
@@ -89,7 +90,7 @@ const {isFetching ,error} = useSelector((state)=>state.theUser)
     else
     {
        const res = fetch(`http://localhost:5000/api/users/edit/user/${user?.user_id}` , {method:"PUT" , headers:{'Content-Type':"application/JSON", 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({ username,fullname, avatar:userDetails.avatar})})
-      setUser(res.data);
+       setUser(res.data);
     }
 
 
@@ -132,7 +133,10 @@ const {isFetching ,error} = useSelector((state)=>state.theUser)
   return (
     <>
     <NavBar/>
-      <div className='container m-auto mt-4  '>
+        <div className='' style={{height:400 , overflow:'hidden'}}>
+        <LampDemo/>
+        </div>
+      <div className='container m-auto mt-4 mb-4  '>
               <div className="col-span-12 lg:col-span-8">
               <div className="card">
                 <div
@@ -179,16 +183,7 @@ const {isFetching ,error} = useSelector((state)=>state.theUser)
                           onChange={(e)=>setFile(e.target.files[0])}
                           type='file'
                         >
-                          {/* <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-3.5 w-3.5"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                          >
-                            <path
-                              d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"
-                            />
-                          </svg> */}
+                        
                         </input>
                       </div>
                     </div>
@@ -238,7 +233,6 @@ const {isFetching ,error} = useSelector((state)=>state.theUser)
                         <span
                           className="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent"
                         >
-                          {/* <i className="fa-regular fa-envelope text-base"></i> */}
                         </span>
                       </span>
                     </label>
@@ -254,13 +248,12 @@ const {isFetching ,error} = useSelector((state)=>state.theUser)
                         <span
                           className="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent"
                         >
-                          {/* <i className="fas fa-cash-register"></i>  */}
                         </span>
                       </span>
                     </label>
                   </div>
-                  <div className="my-7 h-px bg-slate-200 dark:bg-navy-500"></div>
-                  <div>
+                  {/* <div className="my-7 h-px bg-slate-200 dark:bg-navy-500"></div> */}
+                  {/* <div>
                     <h3
                       className="text-base font-medium text-slate-600 dark:text-navy-100"
                     >
@@ -284,7 +277,7 @@ const {isFetching ,error} = useSelector((state)=>state.theUser)
                         Connect
                       </button>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
