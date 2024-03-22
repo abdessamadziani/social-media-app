@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "../../../../utils/cn";
-import Image from "./Image";
+// import Image from "./Image";
 import React, {
   createContext,
   useState,
@@ -49,7 +49,7 @@ export const CardContainer = ({
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn(
-          "py-20 flex items-center justify-center",
+          "py-2 flex items-center justify-center",
           containerClassName
         )}
         style={{
@@ -86,7 +86,7 @@ export const CardBody = ({
   return (
     <div
       className={cn(
-        "h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
+        "h-72	 w-72 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
         className
       )}
     >

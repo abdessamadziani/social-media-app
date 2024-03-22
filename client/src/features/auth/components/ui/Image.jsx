@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Image = ({ src, alt, height, width, className }) => {
+ export const Image = ({ src, alt, height, width, className }) => {
   return (
     <img
       src={src}
@@ -12,4 +12,34 @@ const Image = ({ src, alt, height, width, className }) => {
   );
 };
 
-export default Image;
+
+
+
+// export const Source = ({src,type}) => {
+
+//   return (
+  
+//   );
+// };
+
+
+
+export const Video = ({ height, width, className,src,type}) => {
+  return (
+    <video
+      height={height}
+      width={width}
+      className={className}
+     controls
+    >
+      <source
+          src={src}
+          type={type}
+        />
+    </video>
+
+    
+  );
+};
+
+// export default Image

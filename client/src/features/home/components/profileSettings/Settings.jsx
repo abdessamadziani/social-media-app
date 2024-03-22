@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form"
 import app from '../../../../firebase'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { LampDemo } from '../../../auth/components/ui/lamp'
-import {ThreeDCardDemo} from '../../../auth/components/ui/Post-3d'
 
 
 function Settings() {
@@ -284,9 +283,9 @@ const {isFetching ,error} = useSelector((state)=>state.theUser)
             </div>
   </div>
 
-<div className='w-1/2 m-auto h-40'>
+{/* <div className='w-1/2 m-auto h-40'>
 <ThreeDCardDemo/>
-</div>
+</div> */}
 
   </>
   )

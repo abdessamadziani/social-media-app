@@ -1,4 +1,25 @@
-import React from 'react'
+
+"use client";
+
+import {Image} from "../../auth/components/ui/Image";
+import {Video} from "../../auth/components/ui/Image";
+import React from "react";
+import { CardBody, CardContainer, CardItem } from "../../auth/components/ui/3d-card";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import imgface from '../../../shared/imgs/imgface.jpg'
 import like from '../../../shared/imgs/like.png'
 import liked from '../../../shared/imgs/liked.png'
@@ -132,7 +153,6 @@ const handleSubmitEdit = async(event) => {
 
   const [comments,setComments] = useState(post.comments)
   const [commentwriting, setCommentwriting] = useState('');
-  const [editedComment, setEditedComment] = useState('');
 
 
 
@@ -258,11 +278,10 @@ const handleSubmitEdit = async(event) => {
   // }
   return (
     <>
-    <div style={{width:'100%',marginTop:20,marginBottom:20}} className='text-white'>
+    <div style={{width:'100%',marginTop:20,marginBottom:20}} className='text-white' >
 
+        {/* <div style={{maxHeight:'800px'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 overflow-y-auto scroll-smooth	 	 	">
 
-      
-        <div style={{maxHeight:'800px'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 overflow-y-auto scroll-smooth	 	 	">
         <div className="flex items-center">
                     <div className="flex-shrink-0">
                         <img className="w-8 h-8 rounded-full" src={user?.avatar} alt="Neil image"/>
@@ -277,7 +296,7 @@ const handleSubmitEdit = async(event) => {
                     </div>
 
 
-            {isButtonVisible === true ?   <button
+            {isButtonVisible === true ?  <button
                 id="dropdownButton"
                 onClick={toggleDropdown}
                 className="inline text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
@@ -303,13 +322,11 @@ const handleSubmitEdit = async(event) => {
                     </li>
                 </ul>
             </div>
-           {/* </div> */}
 
-
-        </div>
+        </div> 
         
-        <p className='text-black font-bold text-xs font-sans py-4'>{post.title}</p>
-        {post.image !=='' ? <div className='cover' style={{height:400}}> <img className='cover w-full h-auto rounded object-cover' style={{width:'100%',height:'100%'}} src={`${post.image}`} alt="" /> </div>: post.video !== '' ?
+         <p className='text-black font-bold text-xs font-sans py-4'>{post.title}</p>
+        {post.image !=='' ? <div className='cover' style={{height:400}}> <img className=' w-full h-auto rounded object-cover' style={{width:'100%',height:'100%'}} src={`${post.image}`} alt="" /> </div>: post.video !== '' ?
         <video className="cover w-full rounded" width="500" height="400" controls >
           <source src={`${post.video}`} type="video/mp4"/>
        </video> : '' }
@@ -320,10 +337,7 @@ const handleSubmitEdit = async(event) => {
                         <img className='w-7 h-7' src={Like} alt="like"  onClick={handleLike}/>
                         <p>{likeCount} Likes</p>
                    </div> 
-                   {/* <div className='text-gray-900  mx-4 cursor-pointer'>
-                        <img className='w-6 h-6' src={Dislike} alt="dislike"  onClick={handleDislike}/>
-                        <p> {DislikeCount} Dislikes</p>
-                   </div>  */}
+                  
 
                    <div className='text-gray-900 mx-4  cursor-pointer'>
                    <img className='w-6 h-6' src={commentsIcon} alt="comment" onClick={handleShow} />
@@ -335,10 +349,180 @@ const handleSubmitEdit = async(event) => {
                 <img className='w-6 h-6' src={share} alt="like" />
                   <p>Share</p>
                 </div>
-              </div>
+            </div> 
 
 
 
+
+
+      {show === true ? (
+            <div className='flex mt-6 '>
+                <div className="flex-shrink-0">
+                    <img className="w-8 h-8 rounded-full" src={currentUser?.user?.avatar} alt="Neil image"/>
+                </div>
+                <input
+                    type="text"
+                    name="comment"
+                    id="comment"
+                    className="block flex-1 border-0  bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    placeholder="Write a comment ..."
+                    onChange={(e)=>setCommentwriting(e.target.value)}
+                  />
+                <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded" onClick={handleComment}>
+                 Add comment
+               </button>
+            </div>
+               ) : null }
+
+            {comments.map((item,index)=>{
+               return(
+                  <div  key={index} className="flex items-center mt-4   	">
+                  <div className="flex-shrink-0">
+                      <img className="w-8 h-8 rounded-full" src={item.profileImage} alt="Neil image"/>
+                  </div>
+                  <div className="flex-1 min-w-0 ms-4">
+                      <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                          {item.username}
+                      </p>
+                      <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                          {item.comment}
+                      </p>
+                  </div>
+                  <div className=" cursor-pointer inline-flex items-center text-base font-semibold text-gray-900 dark:text-white" >
+                     <img className='w-4 h-4 cursor-pointer mx-3' src={deleteIcon} alt="deleteIcon"  onClick={(e)=>{deleteComment(item._id)}}/>
+                  </div>
+                 
+                  </div>
+                )})}
+
+
+        </div>
+        */}
+
+
+
+
+
+
+<CardContainer className="inter-var  w-full"  >
+      <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1]    rounded-xl p-6 border h-auto w-full  scroll-smooth	 ">
+      {/* <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border max-h-80   "> */}
+        <CardItem
+          translateZ="50"
+          className="text-xl font-bold text-neutral-600 dark:text-white w-full flex  justify-between	  "
+        >
+         <div className="flex items-center ">
+                    <div className="flex-shrink-0">
+                        <img className="w-8 h-8 rounded-full" src={user?.avatar} alt="Neil image"/>
+                    </div>
+                    <div className="flex-1 min-w-0 ms-4">
+                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
+                        {user?.username}
+                        </p>
+                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                           Followed by me
+                        </p>
+                    </div>
+
+        </div>
+        <div className="">
+          
+            {isButtonVisible === true ?  <button
+                id="dropdownButton"
+                onClick={toggleDropdown}
+                className="inline text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5 bg-green-400"
+                type="button"
+             >
+                <span className="sr-only">Open dropdown</span>
+                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                    <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                </svg>
+            </button> : '' }
+          
+            <div id="dropdown" className={`z-10 ${isOpen ? '' : 'hidden'} text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 `}>
+                <ul className="py-2" aria-labelledby="dropdownButton">
+                    <li>
+                        <button className="block px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onClick={handleModalEdit}>Edit</button>
+                    </li>
+                 
+                    <li>
+                        <button className="block px-2 py-1 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onClick={handleDelete}>Delete</button>
+                    </li>
+                    <li>
+                        <h3 className="cursor-pointer	 block px-2 py-1 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onClick={toggleDropdown}>X</h3>
+                    </li>
+                </ul>
+            </div> 
+        </div>       
+         </CardItem>
+        <CardItem
+          as="p"
+          translateZ="60"
+          className="text-black font-semibold	 text-sm max-w-sm mt-2 dark:text-neutral-300 w-full"
+        >
+          {post.title}
+        </CardItem>
+        <CardItem translateZ="100" className="w-full mt-4">
+        
+      {post.image !=='' ?
+             <Image
+              src={`${post.image}`}
+              height="1000"
+              width="1000"
+              className="w-full h-auto rounded object-cover"
+              alt="thumbnail"
+             />
+           : post.video !== '' ?
+           
+           <Video
+           height="400"
+           width="500"
+           className="object-cover  w-full rounded"
+           controls
+           src={`${post.video}`}
+           type="video/mp4"
+           />
+           
+           
+
+            : '' }
+        </CardItem>
+        <div className="flex justify-between items-center mt-20">
+          <CardItem
+            translateZ={20}
+            // as={Link}
+            href="https://twitter.com/mannupaaji"
+            target="__blank"
+            className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
+          >
+          <div  className='flex items-center '>
+             <div className='text-gray-900  mx-4 cursor-pointer'>
+                 <img className='w-7 h-7' src={Like} alt="like"  onClick={handleLike}/>
+                <p> {likeCount} Likes</p>
+            </div> 
+          
+
+            <div className='text-gray-900 mx-4  cursor-pointer'>
+             <img className='w-6 h-6' src={commentsIcon} alt="comment" onClick={handleShow} />
+             <p>{post.comments.length}  Comments</p>
+             </div>
+
+           </div>
+          
+          </CardItem>
+          <CardItem
+            translateZ={20}
+            as="button"
+            // className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
+          >
+          <div className='text-gray-900 cursor-pointer '>
+                <img className='w-6 h-6' src={share} alt="like" />
+                <p>Share</p>
+            </div>
+        </CardItem>
+        </div>
+
+        
       {show === true ? (
             <div className='flex mt-6 '>
                 <div className="flex-shrink-0">
@@ -380,9 +564,23 @@ const handleSubmitEdit = async(event) => {
                   </div>
                 )})}
 
+      </CardBody>
+    </CardContainer>
 
-        </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div> 
 
 
 
