@@ -15,6 +15,7 @@ const {
 } = require("../controllers/userController");
 const { userById } = require("../middleware/user");
 const { verifyToken } = require("../middleware/verifyToken");
+const {isAdmin} = require("../middleware/verifyToken");
 
 
 const router = express.Router();

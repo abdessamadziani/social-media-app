@@ -16,7 +16,6 @@ const AuthRoutes = () => (
           <Route path="forgetpassword" element={<ForgetPassword />} />
           <Route path="/forget-password-confirmation/:token" element={<ForgetPasswordConfirmation />} />
           <Route path="activate-email/:token" element={<ActiveMe />} /> 
-      {/* <Route path="/home" element={<HomePage />} /> */}
       </Route>
   </Routes>
 );

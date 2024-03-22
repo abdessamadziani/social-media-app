@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router";
-import {Profile , HomePage } from "../components/index";
+import AdminDashboard from "../components/AdminDashboard";
  import HomeLayout from "../layouts/HomeLayout";
-import Settings from "../components/profileSettings/Settings";
+// import Settings from "../components/profileSettings/Settings";
 // import AdminDashboard from "../../admin/components/AdminDashboard";
 
 
@@ -11,10 +11,10 @@ import Settings from "../components/profileSettings/Settings";
 const HomeRoutes = () => (
   <Routes>
       <Route path="/" element={<HomeLayout />} >
-            <Route index element={<HomePage />} />
-            <Route path="profile/:id" element={<Profile />} />
+            <Route index element={<AdminDashboard />} />
+            {/* <Route path="profile/:id" element={<Profile />} />
             <Route path="setting" element={<Settings />} />
-            {/* <Route path="/admin" element={<AdminDashboard />} /> */}
+            <Route path="/admin" element={<AdminDashboard />} /> */}
      </Route>
   </Routes>
 );

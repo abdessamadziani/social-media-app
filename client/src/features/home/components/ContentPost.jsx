@@ -332,10 +332,10 @@ const handleSubmitEdit = async(event) => {
 
               </div>
               <div className='text-gray-900 cursor-pointer '>
-              <img className='w-6 h-6' src={share} alt="like" />
-                <p>Share</p>
+                <img className='w-6 h-6' src={share} alt="like" />
+                  <p>Share</p>
+                </div>
               </div>
-            </div>
 
 
 

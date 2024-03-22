@@ -110,8 +110,8 @@ useEffect(() => {
         <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={specificUser?.avatar} alt="Bonnie image"/>
         <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{specificUser?.username}</h5>
         <span className="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
-        <h5 className=" text-xl font-medium text-gray-900 dark:text-white mt-1">Bio</h5>
-        <span className="text-sm text-gray-500 dark:text-gray-400 p-2">{specificUser?.bio}</span>
+        <h5 className=" text-xl font-medium text-gray-900 dark:text-white mt-1  ">Bio</h5>
+        <span className="text-sm text-gray-500 dark:text-gray-400 p-2 truncate text-center w-full">{specificUser?.bio}</span>
 
 
         <div className="flex mt-4 md:mt-6">

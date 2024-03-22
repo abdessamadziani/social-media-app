@@ -104,7 +104,25 @@ import React from "react";
 import { CardBody, CardContainer, CardItem } from "../ui/3d-card";
 // import Link from "link";
 
+import like from '../../../../shared/imgs/like.png'
+import liked from '../../../../shared/imgs/liked.png'
+import commentsIcon from '../../../../shared/imgs/comments.png'
+import share from '../../../../shared/imgs/share.png'
+
+import { useState } from "react";
+
 export function ThreeDCardDemo() {
+  const [Like,setLike] = useState()
+  const [post,setPost] = useState()
+  const [comments,setComments] = useState()
+  const [likeCount,setLikeCount] = useState()
+  const handleShow = ()=>{
+
+  }
+  const handleLike =()=>{
+    console.log("h")
+  }
+
   return (
     <CardContainer className="inter-var">
       <CardBody className="bg-gray-50 relative group/card  dark:hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
@@ -138,15 +156,31 @@ export function ThreeDCardDemo() {
             target="__blank"
             className="px-4 py-2 rounded-xl text-xs font-normal dark:text-white"
           >
-            Try now →
+          <div  className='flex items-center '>
+             <div className='text-gray-900  mx-4 cursor-pointer'>
+                 <img className='w-7 h-7' src={liked} alt="like"  onClick={handleLike}/>
+                <p> Likes</p>
+            </div> 
+          
+
+            <div className='text-gray-900 mx-4  cursor-pointer'>
+             <img className='w-6 h-6' src={commentsIcon} alt="comment" onClick={handleShow} />
+             <p> Comments</p>
+             </div>
+
+           </div>
+          
           </CardItem>
           <CardItem
             translateZ={20}
             as="button"
-            className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
+            // className="px-4 py-2 rounded-xl bg-black dark:bg-white dark:text-black text-white text-xs font-bold"
           >
-            Sign up
-          </CardItem>
+          <div className='text-gray-900 cursor-pointer '>
+                <img className='w-6 h-6' src={share} alt="like" />
+                <p>Share</p>
+            </div>
+        </CardItem>
         </div>
       </CardBody>
     </CardContainer>

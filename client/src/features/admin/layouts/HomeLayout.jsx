@@ -7,7 +7,7 @@ const AuthLayout = () => {
 
   const navigateTo = (key) => {
     setSelected(key);
-    navigate(`/auth/${key}`);
+    navigate(`/admin/${key}`);
   };
 
   return (

@@ -13,7 +13,9 @@ import AuthRoutes from "./features/auth/routes/AuthRoutes";
 import  SignIn  from './features/auth/components/SignIn';
 // import AdminRoutes from "./features/adminDashboard/routes/AdminRoutes";
 import { PrivateRoutes } from './features/auth/routes/PrivateRoutes';
+import {PrivateAdminRoutes} from './features/admin/routes/PrivateAdminRoutes'
 import HomeRoutes from './features/home/routes/HomeRoutes'
+import AdminRoutes from './features/admin/routes/AdminRoutes'
 // import { isAuthenticated } from './features/auth/helpers';
 
 
@@ -29,6 +31,11 @@ function App() {
 
           <Route  element={<PrivateRoutes/>}>
               <Route  path="/home/*" element={<HomeRoutes />} />
+          </Route>
+
+
+          <Route  element={<PrivateAdminRoutes/>}>
+              <Route  path="/admin/*" element={<AdminRoutes />} />
           </Route>
           {/* <Route  path="/home/*" element={<HomeRoutes />} /> */}
           {/* <Route  path={auth ?"/home/*" : "/auth/*" } element={auth ? <HomeRoutes/> : <AuthRoutes/> } /> */}
