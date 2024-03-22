@@ -6,20 +6,8 @@ import imgface from '../../../shared/imgs/imgface.jpg'
 export function AnimatedPinDemo() {
   return (
     <div className="w-full ">
-      <PinContainer
-        // title="/ui.aceternity.com"
-        // href="https://twitter.com/mannupaaji"
-      >
-        {/* <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[20rem] h-[20rem] "> */}
-          {/* <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-black bg-green-400">
-            Aceternity UI
-          </h3>
-          <div className="text-base !m-0 !p-0 font-normal">
-            <span className="text-black bg-red-500 ">
-              Customizable Tailwind CSS and Framer Motion Components.
-            </span>
-          </div>
-          <div className="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500" /> */}
+      <PinContainer>
+        
                  <div style={{height:'350px'}} className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 	 overflow-y-auto  ">
               <div className="flex items-center justify-between mb-4">
                   <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Notifications</h5>
@@ -122,7 +110,6 @@ export function AnimatedPinDemo() {
                   </ul>
             </div>
           </div>
-        {/* </div> */}
       </PinContainer>
      </div>
   );

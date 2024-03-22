@@ -13,10 +13,10 @@ import 'sweetalert2/dist/sweetalert2.min.css'; // Import the CSS file
 import 'sweetalert2/dist/sweetalert2.min.js'; // Import the JavaScript file
 
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Home', href:'http://localhost:5173/home'  , current: true },
+  { name: 'About', href: '#', current: false },
+  { name: 'Help', href: '#', current: false },
+  { name: 'Contact', href: '#', current: false },
 ];
 
 function classNames(...classes) {
@@ -26,29 +26,12 @@ function classNames(...classes) {
 export default function NavBar() {
   const {user} = useSelector((state)=>state.theUser)
   const dispatch = useDispatch()
-
-  // const [userDetails, setUserDetails] = useState();
-  // const getUserDetails = async () => {
-  //   try {
-       
-  //       const res = await axios.get(
-  //       `http://localhost:5000/api/users/user/details/${user?.user._id}`,
-       
-  //     );
-  //     setUserDetails(res.data)
-      
-  //   } catch (error) {
-  //     // Handle errors
-  //     // console.error('Error:', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getUserDetails()
-  // }, [])
-
-  //  console.log("userDetails:::::::",userDetails)
   const navigate=useNavigate()
+
+  
+
+
+
 
 
 
