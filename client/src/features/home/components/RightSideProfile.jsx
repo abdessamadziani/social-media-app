@@ -32,7 +32,7 @@ function RightSideProfile() {
     }, [])
 
   return (
-    <div>
+    <div className='mt-10'>
           <div style={{width:'25vw'}} className='text-white'>
 
 
@@ -45,10 +45,9 @@ function RightSideProfile() {
 
 
 
-        <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <div style={{width:'360px',marginTop:'320px',marginLeft:'-1px'}} className=" max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 fixed">
         <div className="flex items-center justify-between mb-4">
             <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Suggested for you</h5>
-            
         </div>
 
         {users.map((item,index) =>(

@@ -59,7 +59,7 @@ export default function NavBar() {
 
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure style={{top:0}} as="nav" className="bg-gray-800 fixed w-full z-50 ">
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -127,7 +127,7 @@ export default function NavBar() {
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">Open user menu</span>
                       <img
-                        className="h-8 w-8 rounded-full"
+                        className="h-8 w-8 rounded-full object-cover		"
                         src={user?.user.avatar}
                         alt=""
                       />

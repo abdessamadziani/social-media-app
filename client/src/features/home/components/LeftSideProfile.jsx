@@ -103,11 +103,11 @@ useEffect(() => {
 
     
 
- <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"> 
+ <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-10 "> 
    
 
-   <div className="flex flex-col items-center pb-10 mt-5">
-        <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={specificUser?.avatar} alt="Bonnie image"/>
+   <div className="flex flex-col items-center pb-4 mt-2">
+        <img className="w-24 h-24 mb-2 rounded-full shadow-lg object-cover" src={specificUser?.avatar} alt="Bonnie image"/>
         <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{specificUser?.username}</h5>
         <span className="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
         <h5 className=" text-xl font-medium text-gray-900 dark:text-white mt-1  ">Bio</h5>
@@ -125,22 +125,20 @@ useEffect(() => {
 
 
 
-<div className="w-full max-w-md p-4 bg-white border border-gray-200 mt-10 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+<div style={{maxHeight:'320px'}} className="w-full max-w-md p-2 bg-white border border-gray-200 mt-4 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 verflow-auto overflow-scroll">
               <div className="flex items-center justify-between mb-4">
-                  <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Following</h5>
+                  <h5 className="text-lg font-bold leading-none text-gray-900 dark:text-white">Following</h5>
                   <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
                       {/* {user.user.following.length} */}
                       {followingCounter}
-
-
                   </a>
             </div>
           
-            <div style={{ display: 'grid',gridTemplateColumns: '1fr 1fr 1fr'}} className="  gap-4 ">
+            <div style={{ display:'grid',gridTemplateColumns: '1fr 1fr 1fr'}} className=" m-auto  gap-3 ">
             {followingUsers.map((user,index) => (
                     <Link  key={index} to={`/home/Profile/${user._id}`}>
                         <div  className="" onClick={() => setTimeout(()=>{window.location.reload()},2000) }>
-                            <img className="w-18 h-18 rounded-lg" src={user?.avatar} alt="Neil image"/>
+                            <img className="w-14 h-14 rounded-lg m-auto" src={user?.avatar} alt="Neil image"/>
                             <p className='text-black font-bold text-xs truncate mt-2 text-center'>{user?.username}</p>
                         </div>
                     </Link>

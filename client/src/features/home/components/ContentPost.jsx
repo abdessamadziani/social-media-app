@@ -278,7 +278,7 @@ const handleSubmitEdit = async(event) => {
   // }
   return (
     <>
-    <div style={{width:'100%',marginTop:20,marginBottom:20}} className='text-white' >
+    <div style={{width:'80%', margin:'auto',marginTop:20,marginBottom:20}} className='text-white' >
 
         {/* <div style={{maxHeight:'800px'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 overflow-y-auto scroll-smooth	 	 	">
 
@@ -413,7 +413,7 @@ const handleSubmitEdit = async(event) => {
         >
          <div className="flex items-center ">
                     <div className="flex-shrink-0">
-                        <img className="w-8 h-8 rounded-full" src={user?.avatar} alt="Neil image"/>
+                        <img className="w-8 h-8 rounded-full object-cover" src={user?.avatar} alt="Neil image"/>
                     </div>
                     <div className="flex-1 min-w-0 ms-4">
                         <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
@@ -487,7 +487,7 @@ const handleSubmitEdit = async(event) => {
 
             : '' }
         </CardItem>
-        <div className="flex justify-between items-center mt-20">
+        <div className="flex justify-between items-center ">
           <CardItem
             translateZ={20}
             // as={Link}

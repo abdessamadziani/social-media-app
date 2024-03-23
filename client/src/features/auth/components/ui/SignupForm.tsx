@@ -125,7 +125,7 @@ const submitSignUp = () => {
         </LabelInputContainer>
         <LabelInputContainer className="mb-4">
           <Label htmlFor="bio" >Bio</Label>
-          <Input id="bio" placeholder="bio ..." type="text"  {...register("bio",{required: "Password is required",minLength: {value: 6,message :"Min Length you need 6 caracters "},maxLength: {value: 15,message: "max Length is 15 caracters"}})} onChange={handleChange} />
+          <Input id="bio" placeholder="bio ..." type="text"  {...register("bio",{required: "Bio is required",minLength: {value: 6,message :"Min Length you need 6 caracters "},maxLength: {value: 15,message: "max Length is 15 caracters"}})} onChange={handleChange} />
           {errors.bio && (<small className='flex text-red-500'>{errors.bio.message}</small>)}
 
         </LabelInputContainer>

@@ -151,12 +151,12 @@ const MainPost = () => {
 
   return (
     <>
-    <div style={{width:'45%',margin:'auto'}} className='text-white'>
+    <div style={{width:'45%',marginLeft:'380px'}} className='text-white mt-10'>
       
         <div style={{width:'100%'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
             <div className='flex'>
                 <div className="flex-shrink-0">
-                    <img className="w-8 h-8 rounded-full" src={userDetails?.avatar} alt="Neil image"/>
+                    <img className="w-8 h-8 rounded-full object-cover	" src={userDetails?.avatar} alt="Neil image"/>
                 </div>
                 <input
                     type="text"

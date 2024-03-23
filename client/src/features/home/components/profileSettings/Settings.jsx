@@ -133,7 +133,7 @@ const {isFetching ,error} = useSelector((state)=>state.theUser)
   return (
     <>
     <NavBar/>
-        <div className='' style={{height:400 , overflow:'hidden'}}>
+        <div className=' mt-10' style={{height:400 , overflow:'hidden'}}>
         <LampDemo/>
         </div>
       <div className='container m-auto mt-4 mb-4  '>

@@ -36,10 +36,10 @@ function MainPostProfile() {
   return (
     <div style={{width:'45%',margin:'auto'}} className='text-white'>
       
-        <div style={{width:'100%'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700">
+        <div style={{width:'100%'}}  className="w-full  p-4 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 mt-10">
             <div className='flex'>
                 <div className="flex-shrink-0">
-                    <img className="w-8 h-8 rounded-full" src={user?.user?.avatar} alt="Neil image"/>
+                    <img className="w-8 h-8 rounded-full object-cover		" src={user?.user?.avatar} alt="Neil image"/>
                 </div>
                 <input
                     type="text"

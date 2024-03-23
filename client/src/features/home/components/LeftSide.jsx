@@ -27,23 +27,23 @@ const LeftSide = () => {
 
    
   return (
-    <div style={{width:'20%'}} className='text-white'>
+    <div style={{width:'20%',marginTop:'-80px'}} className='text-white fixed mt-0'>
          
         
           <AnimatedPinDemo/>
 
-          <div className="w-full max-w-md p-4 bg-white border border-gray-200 mt-10 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+          <div style={{maxHeight:'320px'}} className="w-full max-w-md p-4 pb-4 bg-white border border-gray-200 mt-10 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 verflow-auto overflow-scroll">
               <div className="flex items-center justify-between mb-4">
-                  <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Explore</h5>
+                  <h5 className="text-lg font-bold leading-none text-gray-900 dark:text-white">Explore</h5>
                   <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
                       See all
                   </a>
             </div>
           
-            <div style={{ display: 'grid',gridTemplateColumns: '1fr 1fr 1fr'}} className="  gap-4 ">
+            <div style={{ display: 'grid',gridTemplateColumns: '1fr 1fr 1fr'}} className="  gap-5 m-auto ">
                  {post.map((image,index) => (
 
-                     image.image === '' ? '' : <img key={index} className="w-18 h-18 rounded-lg " src={image.image} alt="Neil image"/>
+                     image.image === '' ? '' : <img key={index} className="w-18 h-18 rounded-lg object-cover " src={image.image} alt="Neil image"/>
                 ))}
             </div>
 

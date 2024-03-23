@@ -56,7 +56,7 @@ const Follow = ({userdetails,fetchusers}) => {
   return (
              <div className="flow-root">
                   <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
-                      <li className="py-3 sm:py-4">
+                      <li className="py-1 sm:py-4">
                           <div className="flex items-center">
                               <div className="flex-shrink-0">
                                   <img className="w-10 h-10 rounded-full cover" src={userdetails.avatar} alt="Neil image"/>

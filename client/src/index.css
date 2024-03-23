@@ -5,7 +5,8 @@
 body {
     width: 100vw;
     height: 100vh;
-    background-color: #8adce9;
+    /* background-color: #8adce9; */
+    background-image: linear-gradient(to right top, #e674df, #9f62bc, #614c91, #303462, #0d1a32);
     overflow: hidden;
     overflow-y: scroll
 }

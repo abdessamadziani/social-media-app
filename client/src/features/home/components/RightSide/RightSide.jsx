@@ -26,17 +26,16 @@ const RightSide = () => {
 
 
   return (
-    <div style={{width:'20%'}} className='text-white'>
+    <div style={{width:'20%',marginLeft:'1100px'}} className='text-white fixed mt-10'>
 
 
        <Ads/>
 
 
-           <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
+           <div style={{maxHeight:"350px"}} className="w-full max-w-md p-2 bg-white border border-gray-200  rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 verflow-auto overflow-scroll ">
               <div className="flex items-center justify-between mb-4">
-                  <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Suggested for you</h5>
-                 
-            </div>
+                  <h5 className="text-lg font-bold  leading-none text-gray-900 dark:text-white ">Suggested for you</h5>   
+              </div>
             {users.map((item,index) =>(
             <Follow key={index} fetchusers={getAllUsers}  userdetails={item}/>
 

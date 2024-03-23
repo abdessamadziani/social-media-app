@@ -5,19 +5,19 @@ import imgface from '../../../shared/imgs/imgface.jpg'
 
 export function AnimatedPinDemo() {
   return (
-    <div className="w-full ">
+    <div className="w-full mt-0 ">
       <PinContainer>
         
-                 <div style={{height:'350px'}} className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 	 overflow-y-auto  ">
-              <div className="flex items-center justify-between mb-4">
-                  <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Notifications</h5>
+                 <div style={{height:'220px'}} className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 	 overflow-y-auto  ">
+              <div className="flex items-center justify-between mb-2">
+                  <h5 className="text-lg font-bold leading-none text-gray-900 dark:text-white">Notifications</h5>
                   <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
                       View all
                   </a>
             </div>
             <div className="flow-root">
                   <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
-                      <li className="py-3 sm:py-4">
+                      <li className="py-2 sm:py-4">
                           <div className="flex items-center">
                               <div className="flex-shrink-0">
                                   <img className="w-8 h-8 rounded-full" src={imgface} alt="Neil image"/>
@@ -35,7 +35,7 @@ export function AnimatedPinDemo() {
                               </div>
                           </div>
                       </li>
-                      <li className="py-3 sm:py-4">
+                      <li className="py-2 sm:py-4">
                           <div className="flex items-center ">
                               <div className="flex-shrink-0">
                                   <img className="w-8 h-8 rounded-full" src={imgface} alt="Bonnie image"/>
@@ -53,7 +53,7 @@ export function AnimatedPinDemo() {
                               </div>
                           </div>
                       </li>
-                      <li className="py-3 sm:py-4">
+                      <li className="py-2 sm:py-4">
                           <div className="flex items-center">
                               <div className="flex-shrink-0">
                                   <img className="w-8 h-8 rounded-full" src={imgface} alt="Michael image"/>
@@ -71,7 +71,7 @@ export function AnimatedPinDemo() {
                               </div>
                           </div>
                       </li>
-                      <li className="py-3 sm:py-4">
+                      <li className="py-2 sm:py-4">
                           <div className="flex items-center ">
                               <div className="flex-shrink-0">
                                   <img className="w-8 h-8 rounded-full" src={imgface} alt="Lana image"/>
@@ -89,7 +89,7 @@ export function AnimatedPinDemo() {
                               </div>
                           </div>
                       </li>
-                      <li className="pt-3 pb-0 sm:pt-4">
+                      <li className="pt-2 pb-0 sm:pt-4">
                           <div className="flex items-center ">
                               <div className="flex-shrink-0">
                                   <img className="w-8 h-8 rounded-full" src={imgface} alt="Thomas image"/>
