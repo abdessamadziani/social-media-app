@@ -56,7 +56,7 @@ function LeftSideProfile() {
         const res  = await axios.get(`http://localhost:5000/api/users/post/user/details/${id}`)
         setSpecificUser(res.data);
       } catch (error) {
-        console.log("Some error occured")
+        // console.log("Some error occured")
       }
     }
 useEffect(() => {
@@ -103,18 +103,17 @@ useEffect(() => {
 
     
 
- <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-10 "> 
-   
-
-   <div className="flex flex-col items-center pb-4 mt-2">
-        <img className="w-24 h-24 mb-2 rounded-full shadow-lg object-cover" src={specificUser?.avatar} alt="Bonnie image"/>
-        <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{specificUser?.username}</h5>
+ <div style={{width:'270px'}} className=" max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mt-10 fixed "> 
+  
+   <div className="flex flex-col items-center pb-3 mt-1">
+        <img className="w-20 h-20 mb-2 rounded-full shadow-lg object-cover" src={specificUser?.avatar} alt="Bonnie image"/>
+        <h5 className="mb-1 text-md font-medium text-gray-900 dark:text-white">{specificUser?.username}</h5>
         <span className="text-sm text-gray-500 dark:text-gray-400">Visual Designer</span>
-        <h5 className=" text-xl font-medium text-gray-900 dark:text-white mt-1  ">Bio</h5>
-        <span className="text-sm text-gray-500 dark:text-gray-400 p-2 truncate text-center w-full">{specificUser?.bio}</span>
+        <h5 className=" text-md font-medium text-gray-900 dark:text-white mt-0  ">Bio</h5>
+        <span className="text-sm text-gray-500 dark:text-gray-400 p-1 truncate text-center w-full">{specificUser?.bio}</span>
 
 
-        <div className="flex mt-4 md:mt-6">
+        <div className="flex mt-1 md:mt-6">
             {user?.user?._id !== id ? <div onClick={handleFollow}><button className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>{Follow}</button></div> : <div><button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"  className='inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>Edit Bio</button></div> }
             <Link to='http://localhost:5173/home/setting'  class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">Settings</Link>               
         </div>
@@ -125,7 +124,7 @@ useEffect(() => {
 
 
 
-<div style={{maxHeight:'320px'}} className="w-full max-w-md p-2 bg-white border border-gray-200 mt-4 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 verflow-auto overflow-scroll">
+<div style={{maxHeight:'320px',width:'270px',marginTop:'295px'}} className="w-full max-w-md p-2 bg-white border border-gray-200 mt-4 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 verflow-auto overflow-scroll fixed">
               <div className="flex items-center justify-between mb-4">
                   <h5 className="text-lg font-bold leading-none text-gray-900 dark:text-white">Following</h5>
                   <a href="#" className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">

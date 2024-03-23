@@ -43,6 +43,7 @@ import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 const ContentPost = ({post}) => {
 
 
+
   const currentUser = useSelector((state) => state.theUser.user)
   const accessToken = currentUser.token
 
@@ -52,6 +53,23 @@ const ContentPost = ({post}) => {
   const [openEdit, setOpenEdit] = useState(false)
   const [newTitle, setNewTitle] = useState('')
   const [file, setFile] = useState(null)
+
+  // const getPost = async()=>{
+
+  //   try {
+  //     const res = await axios.get(`http://localhost:5000/api/posts/flw/${currentUser?.user._id}` , {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${accessToken}`
+
+  //       }
+  //     })
+  //     console.log(res.data)
+  //   } catch (error) {
+      
+  //   }
+  //  }
+
 
   const handleDelete = async () =>{
     try {
@@ -67,6 +85,7 @@ const ContentPost = ({post}) => {
       
     }
   }
+ 
 
 const handleModalEdit=()=>{
 
@@ -79,10 +98,6 @@ const cancelButtonRef = useRef(null)
 
 const handleSubmitEdit = async(event) => {
   event.preventDefault();
-
-
-
-
 
 
   if(file !== null){
@@ -109,15 +124,20 @@ const handleSubmitEdit = async(event) => {
   (error) => {
     // Handle unsuccessful uploads
   }, 
-  () => {
+   () => {
     // Handle successful uploads on complete
     // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-      fetch(`http://localhost:5000/api/posts/update/post/${post._id}` , {method:"PUT" , headers:{'Content-Type':"application/JSON", 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({ title:newTitle  , image:downloadURL , video:''})}).then((data)=>{
+    getDownloadURL(uploadTask.snapshot.ref).then( async (downloadURL) => {
+      await fetch(`http://localhost:5000/api/posts/update/post/${post._id}` , {method:"PUT" , headers:{'Content-Type':"application/JSON", 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({ title:newTitle  , image:downloadURL , video:''})}).then((data)=>{
         alert("Your Post was upload successfully img updated");
-        // window.location.reload(true)
+         window.location.reload(true)
       })
-    });
+      // await getUserOfPost()
+      //  await getPost()
+
+    }
+
+    );
   }
 );}
 
@@ -130,8 +150,8 @@ const handleSubmitEdit = async(event) => {
 
 
   const [user,setUser] = useState({});
-  useEffect(() => {
-   const getUserOfPost = async()=>{
+
+  const getUserOfPost = async()=>{
     try {
       const res = await axios.get(`http://localhost:5000/api/users/post/user/details/${post.userId}`)
       setUser(res.data);
@@ -139,10 +159,11 @@ const handleSubmitEdit = async(event) => {
       
     }
    }
-   getUserOfPost();
-  }, [])
 
-  
+  useEffect(()=>{
+   getUserOfPost();
+    // getPost()
+  },[newTitle,file])
 
 
 
@@ -258,24 +279,10 @@ const handleSubmitEdit = async(event) => {
       }
   }
 
-  // const handleDislike = async ()=>{
-  // if(Dislike === dislike)
-  //   {
-  //   await fetch(`http://localhost:5000/api/posts/${post._id}/dislike` , {method:"PUT" , headers:{'Content-Type':"application/Json",'Authorization':`Bearer ${accessToken}`}})
-  //   setDislike(unlike)
-  //   setDislikeCount(DislikeCount + 1)
-  //   // post.like.includes(`${currentUser?.user?._id}`) ? alert("yess") (setLike(like),setLikeCount(post?.like.length - 1)) :null
 
 
-  // }
-  // else
-  // {
-  //   await fetch(`http://localhost:5000/api/posts/${post._id}/dislike` , {method:"PUT" , headers:{'Content-Type':"application/Json",'Authorization': `Bearer ${accessToken}`}})
-  //   setDislike(dislike)
-  //   setDislikeCount(DislikeCount - 1)
 
-  // }
-  // }
+
   return (
     <>
     <div style={{width:'80%', margin:'auto',marginTop:20,marginBottom:20}} className='text-white' >

@@ -54,12 +54,12 @@ const Follow = ({userdetails,fetchusers}) => {
     
 
   return (
-             <div className="flow-root">
+             <div className="flow-root verflow-auto overflow-scroll">
                   <ul role="list" className="divide-y divide-gray-200 dark:divide-gray-700">
                       <li className="py-1 sm:py-4">
                           <div className="flex items-center">
                               <div className="flex-shrink-0">
-                                  <img className="w-10 h-10 rounded-full cover" src={userdetails.avatar} alt="Neil image"/>
+                                  <img className="w-10 h-10 rounded-full object-cover" src={userdetails.avatar} alt="Neil image"/>
                               </div>
                               <div className="flex-1 min-w-0 ms-4">
                                   <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
@@ -70,7 +70,7 @@ const Follow = ({userdetails,fetchusers}) => {
                                   </p>
                               </div>
                               <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white cursor-pointer">
-                                <img className='w-5 h-5' src={follow} alt="add user icon" onClick={()=>handleFollow(userdetails._id)} />
+                                <img className='w-5 h-5 object-cover' src={follow} alt="add user icon" onClick={()=>handleFollow(userdetails._id)} />
                               </div>
                           </div>
                       </li>

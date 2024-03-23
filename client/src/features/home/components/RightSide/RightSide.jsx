@@ -25,6 +25,36 @@ const RightSide = () => {
 
 
 
+    const [searchQuery, setSearchQuery] = useState('');
+
+    useEffect(() => {
+      const fetchUsers = async () => {
+        const options = {
+          method: 'GET',
+          url: `http://localhost:5000/api/users/all/user/${currentUserId}`,
+        };
+  
+        try {
+          const response = await axios.request(options);
+          setUsers(response.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+  
+      fetchUsers();
+    }, []);
+  
+    const filteredUsers = users?.filter(user =>
+      user.username.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const handleSearch =(e)=>{
+        console.log(e.target.value)
+        setSearchQuery(e.target.value)
+    }
+
+
   return (
     <div style={{width:'20%',marginLeft:'1100px'}} className='text-white fixed mt-10'>
 
@@ -33,10 +63,11 @@ const RightSide = () => {
 
 
            <div style={{maxHeight:"350px"}} className="w-full max-w-md p-2 bg-white border border-gray-200  rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 verflow-auto overflow-scroll ">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-2">
                   <h5 className="text-lg font-bold  leading-none text-gray-900 dark:text-white ">Suggested for you</h5>   
               </div>
-            {users.map((item,index) =>(
+              <input   style={{ border: 'none', outline: 'none', boxShadow: 'none' }}   className='border-0 text-black mb-2 focus:border-none' type="text" placeholder='Shearch '  onChange={handleSearch} />
+            {filteredUsers?.map((item,index) =>(
             <Follow key={index} fetchusers={getAllUsers}  userdetails={item}/>
 
             ))}

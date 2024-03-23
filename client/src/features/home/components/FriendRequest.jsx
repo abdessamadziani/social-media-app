@@ -120,7 +120,7 @@ function FriendRequest() {
 //    </div>
 
 
-<div style={{width:'360px',marginTop:'300px',marginLeft:'-1px',marginTop:'1px',maxHeight:'300px'}}  className="w-full max-w-md p-4 bg-white border border-gray-200 mb-10  rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 verflow-auto overflow-scroll fixed">
+<div style={{width:'360px',marginTop:'300px',marginLeft:'-1px',marginTop:'1px',maxHeight:'220px'}}  className="w-full max-w-md p-4 bg-white border border-gray-200 mb-10  rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 verflow-auto overflow-scroll fixed">
 <div className='flex justify-between'>
     <h6 className='text-black font-bold '>Profile Views</h6>
     <p className='text-black font-semibold'>33</p>

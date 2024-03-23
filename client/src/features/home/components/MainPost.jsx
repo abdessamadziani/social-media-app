@@ -6,6 +6,10 @@ import { useState, useEffect } from 'react'
 import {useSelector } from 'react-redux'
 import app from '../../../firebase'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import Spinner from '../spinner'
+import spinnerImg from '../../../shared/imgs/Spinner-1s-200px.svg'
+
+
 
 
 
@@ -211,9 +215,22 @@ const MainPost = () => {
             </div>
         </div>
         
-        {post.map((item,index)=>(
+        {post && post.length > 0 ? (
+  post.map((item,index) => (
+    <ContentPost key={index} post={item} />
+  ))
+) : (
+  <div className='w-full'>
+    <img className='w-full h-36' src={spinnerImg} alt="Loading Spinner" />
+  </div>
+)}
+
+      
+
+
+        {/* {post.map((item,index)=>(
           <ContentPost key={index} post={item}/>
-        ))}
+        ))} */}
     
 
     </div>
