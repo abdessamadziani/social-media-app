@@ -56,7 +56,7 @@ exports.signup = async (req, res) => {
                  const savedUser=await user.save()
                 // return res.status(201).json(user)
 
-                const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+                const token = jwt.sign({ _id: 333 }, process.env.JWT_SECRET);
                 res.cookie('token', token, { expires: new Date(Date.now() + 600000) });
                  const link = `http://localhost:5173/auth/activate-email/${token}`;
                 // const link = `http://localhost:5000/api/users/profile/${token}`;

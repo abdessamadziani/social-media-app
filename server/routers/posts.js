@@ -4,6 +4,17 @@ const User = require("../models/User");
 // const { verifyToken } = require("./verifytoken");
 const { verifyToken } = require("../middleware/verifyToken");
 
+
+
+
+router.get('/api/data', (req, res) => {
+  res.json({ message: 'Data retrieved successfully', data: { name: 'John', age: 30 } });
+});
+
+
+
+
+
 //Create Post
 router.post("/user/post", verifyToken, async (req, res) => {
   try {
@@ -18,7 +29,7 @@ router.post("/user/post", verifyToken, async (req, res) => {
     res.status(200).json(post);
   } catch (error) {
     console.log(req.profile.id);
-    return res.status(500).json("Internal error occured fff");
+    return res.status(500).json("Internal error occured");
   }
 });
 

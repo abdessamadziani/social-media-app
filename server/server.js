@@ -22,7 +22,18 @@ app.get("/", (req, res) => {
 app.use("/api/users", usersRoutes);
 app.use("/api/posts", postsRoutes);
 
+
+
+// app.get('/api/posts/api/data', (req, res) => {
+//   res.json({ message: 'Data retrieved successfully', data: { name: 'John', age: 30 } });
+// });
+
+
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log("Server is running on port ", port);
 });
+
+
+module.exports = app;

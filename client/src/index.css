@@ -7,8 +7,11 @@ body {
     height: 100vh;
     /* background-color: #8adce9; */
     /* background-image: linear-gradient(to right top, #e674df, #9f62bc, #614c91, #303462, #0d1a32); */
-    background-image: linear-gradient(to right top, #000000, #141115, #1a1e25, #192c32, #1e3a37);
-        overflow: hidden;
+
+    /* background-image: linear-gradient(to right top, #000000, #141115, #1a1e25, #192c32, #1e3a37); */
+
+    background-image: linear-gradient(to right top, #14211f, #152422, #172725, #182a28, #192d2b);
+    overflow: hidden;
     overflow-y: scroll
 }
 ::-webkit-scrollbar{
