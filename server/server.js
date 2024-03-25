@@ -30,10 +30,16 @@ app.use("/api/posts", postsRoutes);
 
 
 
-const port = process.env.PORT || 5000;
+// const port = process.env.PORT || 5000;
+// app.listen(port, () => {
+//   console.log("Server is running on port ", port);
+// });
+
+const port = process.env.NODE_ENV === 'test' ? 5001 : 5000;
 app.listen(port, () => {
   console.log("Server is running on port ", port);
 });
+
 
 
 module.exports = app;

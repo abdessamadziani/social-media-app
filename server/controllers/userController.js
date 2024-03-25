@@ -103,7 +103,6 @@ exports.signup = async (req, res) => {
 exports.signin =(req, res) => {
 
     const { email, password } = req.body;
-    console.log({email})
      if (!email && password) {
               return res.status(400).json({ message: 'email is not allowed to be empty' });
   
@@ -140,7 +139,6 @@ exports.signin =(req, res) => {
   
             res.cookie('token', token, { expires: new Date(Date.now() + 600000) });
   
-               console.log("good")
   
             const { _id, fullname, email,following,followers,username,gender,avatar,role } = user;
             res.json({
