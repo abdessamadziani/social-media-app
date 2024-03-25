@@ -215,7 +215,7 @@ const MainPost = () => {
             </div>
         </div>
         
-        {post && post.length > 0 ? (
+     {post && post.length > 0 ? (
   post.map((item,index) => (
     <ContentPost key={index} post={item} />
   ))

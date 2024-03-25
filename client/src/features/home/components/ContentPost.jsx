@@ -81,6 +81,8 @@ const ContentPost = ({post}) => {
         }
       })
       setUser(res.data);
+      window.location.reload(true)
+
     } catch (error) {
       
     }

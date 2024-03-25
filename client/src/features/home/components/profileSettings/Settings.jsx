@@ -169,7 +169,7 @@ const {isFetching ,error} = useSelector((state)=>state.theUser)
                     >
                     <div className="avatar mt-1.5 h-20 w-20">
                       <img
-                        className="mask is-squircle"
+                        className="mask is-squircle object-cover"
                         src={user?.user.avatar}
                         alt="avatar"
                         //  onChange={(e)=>setFile(e.target.files[0])}

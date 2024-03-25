@@ -14,9 +14,7 @@ function RightSideProfile() {
 
     const [followers,setFollowers] = useState([]);
     const [users,setUsers] = useState([]);
-
-
-
+  
 
     const getAllUsers = async()=>{
         try {

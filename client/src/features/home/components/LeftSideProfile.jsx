@@ -20,6 +20,7 @@ function LeftSideProfile() {
 
     let location = useLocation();
     let id = location.pathname.split("/")[3];
+    console.log("id::",id)
 
 
 
@@ -83,7 +84,10 @@ useEffect(() => {
     
      getAllFollowingUsers();
     }, [])
-    const [Follow , setUnFollow] = useState([user?.user?.following.includes(id) ? "Unfollow" : "Follow"]);
+    //  const [Follow , setUnFollow] = useState([specificUser?.following?.includes(id) ? "Follow" : " Unfollow"]);
+     const [Follow , setUnFollow] = useState('Unfollow')
+
+
     const handleFollow = async()=>{
         if(Follow === "Follow"){
           await fetch(`http://localhost:5000/api/users/following/${id}` , {method:'PUT', headers:{'Content-Type':"application/JSON" ,'Authorization': `Bearer ${accesstoken}`} , body:JSON.stringify({userId:`${user.user._id}`})})
@@ -136,7 +140,7 @@ useEffect(() => {
             <div style={{ display:'grid',gridTemplateColumns: '1fr 1fr 1fr'}} className=" m-auto  gap-3 ">
             {followingUsers.map((user,index) => (
                     <Link  key={index} to={`/home/Profile/${user._id}`}>
-                        <div  className="" onClick={() => setTimeout(()=>{window.location.reload()},2000) }>
+                        <div  className="" onClick={() => setTimeout(()=>{window.location.reload()},500) } >
                             <img className="w-14 h-14 rounded-lg m-auto" src={user?.avatar} alt="Neil image"/>
                             <p className='text-black font-bold text-xs truncate mt-2 text-center'>{user?.username}</p>
                         </div>
