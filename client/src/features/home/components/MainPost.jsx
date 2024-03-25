@@ -122,7 +122,7 @@ const MainPost = () => {
   fetch(`http://localhost:5000/api/posts/user/post` , {method:"POST" , headers:{'Content-Type':"application/JSON", 'Authorization':`Bearer ${accessToken}`} , body:JSON.stringify({title:title , video:'' , image:''})}).then((data)=>{
     alert("Your Post was upload successfully status");
     window.location.reload(true)
-  })
+  }).catch(error=>console.log(error))
 }
 
 

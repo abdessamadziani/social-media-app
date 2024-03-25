@@ -17,13 +17,12 @@ const { verifyToken } = require("../middleware/verifyToken");
 router.post("/user/post",verifyToken, async (req, res) => {
   try {
     let { title, image, video } = req.body;
-    let newpost = new Post({
+    let post = await Post.create({
       title,
       image,
       video,
       userId: req.profile.id,
     });
-    const post = await newpost.save();
     res.status(200).json(post);
   } catch (error) {
     return res.status(500).json("Internal error occured");

@@ -16,12 +16,15 @@ const {
 const { userById } = require("../middleware/user");
 const { verifyToken } = require("../middleware/verifyToken");
 const {isAdmin} = require("../middleware/verifyToken");
+const signinValidation = require("../validations/signin.validation");
+const { checkValidation } = require("../middleware/checkValidation");
+const signupValidation = require("../validations/signup.validation");
 
 
 const router = express.Router();
 
-router.post("/signup", signup);
-router.post("/signin", signin);
+router.post("/signup", signupValidation, checkValidation, signup);
+router.post("/signin", signinValidation, checkValidation, signin);
 router.get("/profile/:token", activeTrue);
 router.param("token", userById);
 
