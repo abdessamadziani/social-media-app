@@ -1,7 +1,6 @@
 const app = require('../server'); // Importing the router
 const request = require('supertest');
 const User = require('../models/User'); // Assuming you have a User model
-const  signin  = require('../controllers/userController');
 const bcrypt = require('bcrypt');
 
 
@@ -89,3 +88,6 @@ jest.mock('../models/User', () => ({
   
     // Add more test cases as needed
   });
+
+
+

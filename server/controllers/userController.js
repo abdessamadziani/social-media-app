@@ -3,7 +3,7 @@ const sendEmail= require('../utils/sendEmail')
 const jwt=require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
 const User = require('../models/User');
-
+require('dotenv').config()
 
 
 
@@ -101,7 +101,7 @@ exports.signup = async (req, res) => {
 
 
 exports.signin =(req, res) => {
-
+console.log("ttt")
     const { email, password } = req.body;
      if (!email && password) {
               return res.status(400).json({ message: 'email is not allowed to be empty' });
@@ -134,8 +134,9 @@ exports.signin =(req, res) => {
           }
   
             
-  
-            const token = jwt.sign({ _id: user._id }, process.env.jwt_SECRET);
+            const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+            
+            
   
             res.cookie('token', token, { expires: new Date(Date.now() + 600000) });
   
@@ -218,10 +219,8 @@ exports.signin =(req, res) => {
 
   exports.reset = async (req, res) => {
     try {
-      // Retrieve the new password from the request, e.g., req.body.newpassword
       const newPassword = await bcrypt.hash(req.body.newpassword,10);
 
-      // Retrieve the user by their ID
       const user = await User.findById(req.profile._id).exec();
   
       if (!user) {
@@ -229,10 +228,8 @@ exports.signin =(req, res) => {
         return;
       }
   
-      // Update the virtual 'password' property
       user.password = newPassword;
   
-      // Save the user model to trigger the virtual property and update the hashed_password
       const updatedUser = await user.save();
   
       res.status(200).json({ message: 'Password reset successful', userId: updatedUser._id });
