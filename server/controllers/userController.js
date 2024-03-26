@@ -67,7 +67,7 @@ exports.signup = async (req, res) => {
     //     from: 'Syndicale',
     //     to: savedAdmin.email, // Use the user's email
     //     subject: 'Hello Dear '+user.name,
-    //     // html:`<a href="http://localhost:8000/api/admins/profile/${token}">Active Account Now</a>`
+    //     // html:`< href="http://localhost:8000/api/admins/profile/${token}">Active Account Now<
     //      html:`<a href=${link}>Active Account Now</a>`
 
     // }
